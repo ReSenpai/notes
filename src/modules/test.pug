@@ -1,0 +1,21 @@
+//- mixin  li-dropdown
+
+mixin li-dropdown(room, counter, id)
+    li.short-dropdown__li= room
+        .counter
+            .counter__circle(class="counter__circle_minus")
+            .counter__number#counter__number= counter
+            .counter__circle(class="counter__circle_plus")
+                
+
+//- block short-dropdown
+
+.test
+    .short-dropdown
+        .short-dropdown__header
+            p.short-dropdown__text-header#__text-header 2 спальни, 2 кровати...
+            i.short-dropdown__arrow expand_more
+        ul.short-dropdown__ul
+            +li-dropdown('cпальни', '2')
+            +li-dropdown('кровати', '2')
+            +li-dropdown('ванные комнаты', '0')         
