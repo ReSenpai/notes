@@ -50,6 +50,14 @@ let result = fccRegex.test(myString);
 
 ### Извлечение совпадений
 
-До сих пор вы только проверяли, существует ли шаблон или нет в строке. Вы так же можете извлечь фактические совпадения, которые вы нашли с помощью метода ```javascript .match()```.
+До сих пор вы только проверяли, существует ли шаблон или нет в строке. Вы так же можете извлечь фактические совпадения, которые вы нашли с помощью метода ``` .match()```.
+```javascript
+"Hello, World!".match(/Hello/);
+// Returns ["Hello"]
+let ourStr = "Regular expressions";
+let ourRegex = /expressions/;
+ourStr.match(ourRegex);
+// Returns ["expressions"]
+```
 [Вернутся назад](../README.md)
 
