@@ -13,6 +13,6 @@ let testStr = "Hello World";
 let testRegex = /Hello/;
 testRegex.test(testStr);
 // returns true
-
+```
 [Вернутся назад](../README.md)
 
