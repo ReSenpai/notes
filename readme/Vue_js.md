@@ -111,4 +111,41 @@
 </script>
 ```
 
+### Добавление событий
+
+* ```v-on:click="methodName"``` - добавление обработчика событий на клик мыши. В примере ниже мы добавили прослушку события клика на элементе ```button``` и с его помощью активируем функцию на увеличение ```counter```.
+* Во втором примере с ```counter2``` мы добавили код функции во внутрь директивы, что тоже приемлемо с простыми функциями.
+* ```v-on:mouseover="methodName"``` - обработчик события наведения мыши на элемент. В примере ниже мы применили эту директиву к элементу ```h2``` счетчика 2. При наведении мыши данный элемент будет менять цвет на красный.
+
+```html
+<div id="idName">
+    <h2>Счетчик = {{ counter }}</h2>
+    <button v-on:click="riseCounter">Увеличить</button>
+
+    <hr>
+
+    <h2 v-on:mouseover="onHover">Счетчик 2 = {{ counter2 }}</h2>
+    <button v-on:click="counter2++">Увеличить</button>
+</div>
+
+<script>
+    new Vue({
+        el: '#idName',
+        data: {
+           counter: 0
+        },
+        methods: {
+            riseCounter: function() {
+                this.counter++
+            },
+            onHover: function(event) {
+                event.target.style.color = 'red'
+            }
+        }
+    })
+</script>
+```
+
+# Передача параметров в метод
+
 [Вернутся назад](../README.md)
