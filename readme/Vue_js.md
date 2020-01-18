@@ -146,6 +146,39 @@
 </script>
 ```
 
-# Передача параметров в метод
+### Передача параметров в метод
+
+Когда мы хотим передать параметры в нашу функцию, то мы делаем это так же, как и в нативном javascript-е - внутри скобочек ```( )```.
+* Стоит так же отметить, если мы хотим получить сам объект события, то в качестве дополнительного аргумента функции можно использовать ```event```. Но уже при вызове функции, что бы обозначить Vue.js , что мы передаем так же нативный объект события, нужно использовать специальное зарезервированое имя в синтаксисе Vue.js - ```$event```.
+
+```html
+<div id="idName">
+    <h2>{{ title }} = {{ counter }}</h2>
+    <button v-on:click="riseCounter(5, 'Изменено на 5', $event)">Увеличить на 5</button>
+    <button v-on:click="riseCounter(10, 'Изменено на 10', $event)">Увеличить на 10</button>
+</div>
+
+<script>
+    new Vue({
+        el: '#idName',
+        data: {
+           counter: 0,
+           title: 'Счетчик'
+        },
+        methods: {
+            riseCounter: function(num, str, event) {
+                this.counter += num
+                this.title = str
+
+                if(num === 5) {
+                    event.target.style.color = 'blue'
+                } else if (num === 10) {
+                    event.target.style.color = 'red'
+                }
+            }
+        }
+    })
+</script>
+```
 
 [Вернутся назад](../README.md)
