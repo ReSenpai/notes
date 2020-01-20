@@ -61,3 +61,18 @@ ourStr.match(ourRegex);
 ```
 [Вернутся назад](../README.md)
 
+
+### Найти больше, чем первое совпадение
+
+Для поиска или извлечения шаблона более одного раза можно использовать флаг ```g```
+
+* Мультифлаги записываются подряд(```/search/gi``` - как тут флаши g и i)
+
+```javascript
+let twinkleStar = "Twinkle, twinkle, little star";
+let starRegex = /twinkle/gi 
+let result = twinkleStar.match(starRegex);
+```
+
+
+
