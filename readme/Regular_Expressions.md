@@ -312,6 +312,16 @@ whiteSpace.match(spaceRegex);
 
 ### Сопоставление символов без пробелов
 
+Поиск не пробелов с помощью ```\S```, которая является заглавной ```S```. Соответствует ```[^ \r\t\f\n\v]```.
+
+```javascript
+let whiteSpace = "Whitespace. Whitespace everywhere!"
+let nonSpaceRegex = /\S/g;
+whiteSpace.match(nonSpaceRegex).length; // Returns 32
+```
+
+### Установка верхнего и нижнего числа совпадений
+
 
 
 
