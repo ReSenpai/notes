@@ -487,7 +487,7 @@ let change = "$1"
 let result = hello.replace(wsRegex, change);
 ```
 
-[Назад](README.md)
+[Назад](../README.md)
 
 
 
