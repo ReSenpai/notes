@@ -1,7 +1,7 @@
 # re notes
 
 [Регулярные выражения](readme/Regular_Expressions.md)
-[Проблемы отладки](readme/Debugging_Challenges)
+[Отладка](readme/Debugging_Challenges.md)
 
 [Vue.js](readme/Vue_js.md)
 
