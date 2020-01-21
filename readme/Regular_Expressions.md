@@ -478,6 +478,16 @@ let result = str.replace(fixRegex, replaceText);
 
 ### Удаление пробелов из начала и конца
 
+Бывает так, что пробелы вокруг строк не нужны, но они там всё равно есть. Типичная обработка строк заключается в удалении пробелов в их начале и конце.
+
+```javascript
+let hello = "   Hello, World!  ";
+let wsRegex = /^\s+(\w+,\s\w+!)\s+$/;
+let change = "$1"
+let result = hello.replace(wsRegex, change);
+```
+
+[Назад](README.md)
 
 
 
