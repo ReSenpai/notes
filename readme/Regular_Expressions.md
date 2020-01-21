@@ -453,6 +453,37 @@ let result = reRegex.test(repeatNum);
 
 ### Использование класса захвата для поиска и замены
 
+Поиск полезен. Однако вы можете сделать поиск еще более мощным, когда он также изменяет (или заменяет) соответствующий текст.
+
+Вы можете искать и заменять текст в строке с помощью ```.replace()```. 
+* Первый параметр для ```.raplace()``` это шаблон регулярного выражения для поиска.
+* Второй параметро - это строка для замены совпадений или функция для выполнения каких либо действий.
+
+```javascript
+let wrongText = "The sky is silver.";
+let silverRegex = /silver/;
+wrongText.replace(silverRegex, "blue");
+// Returns "The sky is blue."
+```
+
+Вы так же можете получить доступ к классам захвата в строке замены, используя знак доллара ```$```.
+
+```javascript
+let str = "one two three";
+let fixRegex = /(\w+)\s(\w+)\s(\w+)/;
+let replaceText = "$3 $2 $1"; 
+let result = str.replace(fixRegex, replaceText);
+//return  "three two one" 
+```
+
+### Удаление пробелов из начала и конца
+
+
+
+
+
+
+
 
 
 
