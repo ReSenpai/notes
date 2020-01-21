@@ -356,6 +356,22 @@ multipleA.test(A100); // Returns true
 
 ### Установка точного количества совпадений
 
+Когда вам требуется определить точное количество совпадений, достаточно просто поместить это число между фигурными скобками.
+
+Например, что бы сопоставить только слово ```"hah"``` с буквой ```a``` 3 раза, ваше регулярное выражение будет ```/ha{3}h/```.
+
+```javascript
+let A4 = "haaaah";
+let A3 = "haaah";
+let A100 = "h" + "a".repeat(100) + "h";
+let multipleHA = /ha{3}h/;
+multipleHA.test(A4); // Returns false
+multipleHA.test(A3); // Returns true
+multipleHA.test(A100); // Returns false
+```
+
+### Проверка всего или ничего
+
 
 
 
