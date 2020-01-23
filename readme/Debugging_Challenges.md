@@ -89,6 +89,26 @@ JavaScript распознает шесть примитивных(неизмен
 
 ### Поймать смешанное использование одинарных и двойных кавычек
 
+JavaScript позволяет использовать как одинарные ```(')```, так и двойные ```(")``` кавычки для объявления строки. Решение о том, какой из них использовать, обычно сводится к личным предпочтениям, за некоторыми исключениями.
+
+Наличие двух вариантов кавычек это отлично, когда строка имеет сокращения или другой кусок текста, который находится в кавычках. Просто будьте осторожны, чтобы не закарыть строку слшком рано, что приведет к синтаксической ошибке.
+
+Вот несколько примеров смешивания кавычек:
+
+```javascript
+// These are correct:
+const grouchoContraction = "I've had a perfectly wonderful evening, but this wasn't it.";
+const quoteInString = "Groucho Marx once said 'Quote me as saying I was mis-quoted.'";
+// This is incorrect:
+const uhOhGroucho = 'I've had a perfectly wonderful evening, but this wasn't it.';
+```
+Конечно, можно использовать только один стиль кавычек. Кавычки внутри строки можно экранировать с помощью символа обратной косой черты ```(\)```:
+
+```javascript
+// Correct use of same quotes:
+const allSameQuotes = 'I\'ve had a perfectly wonderful evening, but this wasn\'t it.';
+```
+
 
 
 [Вернутся назад](../README.md)
