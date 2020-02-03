@@ -1,0 +1,16 @@
+
+//- mixins
+
+mixin lotOfGoods(headerText, src, alt)
+    .product-container
+        .product-container__header
+            span.product-container__header-text= headerText
+        img.product-container__(src= src, alt= alt)
+        .product-container__descriptions-box
+            .product-container__descriptions-text
+            .product-container__price
+
+
+.main
+    +lotOfGoods('ololo', , alt)
+    
