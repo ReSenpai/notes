@@ -23,7 +23,7 @@
 const TelegramBot = require('node-telegram-bot-api');
 ```
 
-### <details>
+- <details>
 <summary>Создание простого бота</summary>
 
 Бот создаётся, как новый экземпляр класа ```TelegramBot```. В конструктор данного класа мы передаем несколько параметров:
