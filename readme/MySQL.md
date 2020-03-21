@@ -89,4 +89,7 @@ DELETE FROM billing WHERE (payer_email is NULL OR payer_email = '') OR (recipien
 Удаляем из таблицы все строки, в которых значения payer_email или recipient_email равный пустой строке или NULL
 
 
+### Агрегация данных
+
+
 [Назад](../README.md)
