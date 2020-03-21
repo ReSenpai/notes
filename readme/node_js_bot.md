@@ -60,5 +60,8 @@ bot.on('message', (msg) => {
 </details>
 
 
+### Настройка Bot Father
+
+
 
 [Вернутся назад](../README.md)
