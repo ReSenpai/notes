@@ -83,7 +83,8 @@ UPDATE name_table SET coins='0' WHERE user_id = '2342523523';
 10. Удаление данных из таблицы
 
 ```sql
-DELETE FROM billing WHERE (payer_email is NULL OR payer_email = '') OR (recipient_email is NULL OR recipient_email = '');
+DELETE FROM billing WHERE (payer_email is NULL OR payer_email = '') 
+OR (recipient_email is NULL OR recipient_email = '');
 ```
 
 Удаляем из таблицы все строки, в которых значения payer_email или recipient_email равный пустой строке или NULL
