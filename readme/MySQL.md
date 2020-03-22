@@ -92,5 +92,28 @@ OR (recipient_email is NULL OR recipient_email = '');
 
 ### Агрегация данных
 
+1. С помощью функции ```count()``` можно посчитать количество строк в таблице.
+
+```sql
+SELECT COUNT(1) FROM name_table;
+```
+
+2. Подсчет среднего значения осуществляется с помощью функции AVG(), внутрь которой пишем нужный столбец.
+
+```sql
+SELECT AVG(coins) FROM name_table;
+```
+
+3. Подсчет среднего количества времени. Функция DATADIFF() - вычисляет разницу между днями.
+
+```sql
+SELECT finish_time, start_time,
+    AVG(DATEDIFF(finish_time, start_time))
+FROM name_table WHERE finish_time is not null;
+```
+
+Допустим ты хочешь подсчитать среднее время выполнения какого либо квеста в игре, сделав выборку среди всех игроков - то это изи делать этой строчкой кода.
+
+4. 
 
 [Назад](../README.md)
