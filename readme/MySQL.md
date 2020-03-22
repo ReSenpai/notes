@@ -114,6 +114,34 @@ FROM name_table WHERE finish_time is not null;
 
 Допустим ты хочешь подсчитать среднее время выполнения какого либо квеста в игре, сделав выборку среди всех игроков - то это изи делать этой строчкой кода.
 
-4. 
+4. Можем так же вывести в отчет макимальное и минимальное время, затраченное на выполнения квеста.
+
+```sql
+SELECT finish_time, start_time,
+    AVG(DATEDIFF(finish_time, start_time)),
+    MAX(DATEDIFF(finish_time, start_time)),
+    MIN(DATEDIFF(finish_time, start_time))
+FROM name_table WHERE finish_time is not null;
+```
+
+5. Для того, что бы сделать наш отчет более деталезированным, мы можем использовать группировку наших данных по значениям какого либо атрибута.
+
+```sql
+SELECT finish_time, start_time,
+    AVG(DATEDIFF(finish_time, start_time)) as avg_time,
+    MAX(DATEDIFF(finish_time, start_time)) as max_time,
+    MIN(DATEDIFF(finish_time, start_time)) as min_time,
+    name_user
+FROM name_table WHERE finish_time is not null
+group by name_user
+order by avg_time DESC
+LIMIT 100;
+```
+Так мы можем вывести всю эту статистику в разрезе для каждого игрока. К примеру у нас есть в игре какой то данж и мы можем посмотреть, как разные игроки проходят эти данжи. Выведем в верх списка игроков, которые больше всего в среднем затрачивают время на прохождения данжа.
+* ```group by``` -  группирует отчет по определенным атрибутам
+* ```order by``` - сортирует отчет
+* ```DESC``` - делает сортировку по убыванию, от большего к меньшему
+* ```LIMIT 100``` - выводим список топ 100.
+
 
 [Назад](../README.md)
