@@ -8,7 +8,7 @@
 
 [Создание Telegram бота на Node.js](readme/node_js_bot.md)
 
-- MySQL
+* MySQL
     1. [Базовые операции](readme/SQL_step1.md)
     2. [Выборки из нескольких источников](readme/SQL_step2.md)
 
