@@ -21,7 +21,7 @@ testRegex.test(testStr);
 
 ```javascript
 let wrongRegex = /kevin/;
-wrongRegex.test(testStr);
+wrongRegex.test("KEVIN");
 // Returns false
 ```
 
