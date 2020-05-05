@@ -1,24 +1,18 @@
+function filteredArray(arr, elem) {
+    let newArr = [];
+    // Only change code below this line
+    for (let i = 0; i < arr.length; i++) {
+      for (let g = 0; g < arr[i].length; g++) {
 
-function zeroArray(m, n) {
-    // Creates a 2-D array with m rows and n columns of zeroes
-    let newArray = [];
-    let row = [];
-    for (let i = 0; i < m; i++) {
-      // Adds the m-th row into newArray
-  
-      for (let j = 0; j < n; j++) {
-        // Pushes n zeroes into the current row to create the columns
-        row.push(0);
-        console.log(`${row} внутренний`)
-    
+        if (arr[i][g] !== elem) {
+            newArr.push(arr[i])
+        }
       }
-      // Pushes the current row, which now has n zeroes in it, to the array
-      newArray.push(row);
-      row = [];
-      console.log(`${row} внешний`)
     }
-    return newArray;
+    // Only change code above this line
+    return newArr;
 }
+
+console.log(filteredArray([[3, 2, 3], [1, 6, 3], [3, 13, 26], [19, 3, 9]], 3));
   
-let matrix = zeroArray(3, 2);
-console.log(matrix);
+  
