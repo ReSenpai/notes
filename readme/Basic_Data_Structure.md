@@ -302,7 +302,180 @@ console.log(checkInventory("apples"));
 ### Использование ключевого слова ```delete``` для удаления свойств объекта
 
 
+Теперь вы знаете, что такое объекты и их основные характеристики и приемущества. Короче говоря, это хранилища ключевых значений, которые обеспечивают гибкий, интуитивно понятный способ структурирования данных и быстрый доступ к ним.
 
+Давайте в последний раз вернемся к нашему примеру с объектом ```foods```. Если мы хоти удалить ключ ```Apple```, мы можем удалить его с помощью ключевого слова ```delete``` следующим образом:
+
+```javascript
+delete foods.apples;
+```
+
+### Проверить, имеет ли объект свойство
+
+Теперь мы можем добавлять, изменять и удалять ключи из объектов. Но что, если мы просто хотим знать, имеет ли объект определенной свойство? JavaScript предоставляет нам два различных способа сделать это.
+
+Один из них использует метод ```hasOwnProperty()```, а другой ключевое слово ```in```. Если у нас есть объект ```users``` со свойством ```Alan```, мы можем проверить его наличие любым из следующих способов:
+
+
+```javascript
+users.hasOwnProperty('Alan');
+'Alan' in users;
+// both return true
+```
+
+```javascript
+let users = {
+  Alan: {
+    age: 27,
+    online: true
+  },
+  Jeff: {
+    age: 32,
+    online: true
+  },
+  Sarah: {
+    age: 48,
+    online: true
+  },
+  Ryan: {
+    age: 19,
+    online: true
+  }
+};
+
+function isEveryoneHere(obj) {
+  // Only change code below this line
+  let alan = 'Alan' in users 
+  let jeff = 'Jeff' in users
+  let sarah = 'Sarah' in users
+  let ryan = 'Ryan' in users
+
+  return (alan && jeff && sarah && ryan) ? true : false;
+  // Only change code above this line
+}
+
+console.log(isEveryoneHere(users));
+```
+
+
+### Итерация по ключам объекта с помощью оператора ```for...in```
+
+
+Иногда вам может потребоваться перебрать все ключи внутри объекта. Для этого требуется определенный синтаксис в JavaScript, называемый оператором ```for...in```. Для нашего объека ```users``` это может выглядеть следующим образом:
+
+```javascript
+for (let user in users) {
+  console.log(user);
+}
+
+// logs:
+Alan
+Jeff
+Sarah
+Ryan
+```
+
+В этом операторе мы определили переменную ```user```, и, как мы можем увидеть, эта переменная была сброшена во время каждой итерации к каждому из ключей объекта, когда оператор прошел через объект, в результате чего имя каждого пользователя было напечатано в консоли.
+
+Примечание: Объекты не поддерживают порядок хранимых ключей, как это делают массивы. Таким образом положение ключа на объекте или относительный порядок, в котором он появляется, не имеет значения при обращении к этому ключу или обращении к нему.
+
+```javascript
+let users = {
+  Alan: {
+    online: false
+  },
+  Jeff: {
+    online: true
+  },
+  Sarah: {
+    online: false
+  }
+}
+
+function countOnline(usersObj) {
+
+  let count = 0;
+  for (let user in usersObj) {
+    if (usersObj[user].online) {
+      count += 1;
+    }
+  }
+  return count;
+
+}
+
+console.log(countOnline(users));
+```
+
+
+### Сгенерировать массив всех ключей объекта с помощью ```Object.keys()```
+
+Мы так же можем создать массив, который содержит все ключи, хранящиеся в объекте, используя метод ```Object.keys()``` и передать объект в качестве аргумента. Это вернет массив со строками, представляющими каждое свойство в объекте. Опять же, не будет никакого определенного порядка для записей в массиве.
+
+```javascript
+let users = {
+  Alan: {
+    age: 27,
+    online: false
+  },
+  Jeff: {
+    age: 32,
+    online: true
+  },
+  Sarah: {
+    age: 48,
+    online: false
+  },
+  Ryan: {
+    age: 19,
+    online: true
+  }
+};
+
+function getArrayOfUsers(obj) {
+  // Only change code below this line
+  return Object.keys(obj);
+  // Only change code above this line
+}
+
+console.log(getArrayOfUsers(users));
+// [ 'Alan', 'Jeff', 'Sarah', 'Ryan' ]
+```
+
+
+### Изменение массива, хранящегося в объекте
+
+```javascript
+let user = {
+  name: 'Kenneth',
+  age: 28,
+  data: {
+    username: 'kennethCodesAllDay',
+    joinDate: 'March 26, 2016',
+    organization: 'freeCodeCamp',
+    friends: [
+      'Sam',
+      'Kira',
+      'Tomo'
+    ],
+    location: {
+      city: 'San Francisco',
+      state: 'CA',
+      country: 'USA'
+    }
+  }
+};
+
+function addFriend(userObj, friend) {
+  // Only change code below this line
+  let friends = userObj.data.friends
+  friends.push(friend)
+  return friends
+  // Only change code above this line
+}
+
+console.log(addFriend(user, 'Pete'));
+```
 
 
 [Вернутся назад](../README.md)

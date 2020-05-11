@@ -1,21 +1,30 @@
-function filteredArray(arr, elem) {
-    let newArr = [];
-    // Only change code below this line
-    for (let i = 0; i < arr.length; i++) {
-      let check = 0;
-      for (let g = 0; g < arr[i].length; g++) {
-        if (arr[i][g] == elem) {
-          check = 1;
-        }
-      }
-      if (check == 0) {
-        newArr.push(arr[i])
-      }
+
+let user = {
+  name: 'Kenneth',
+  age: 28,
+  data: {
+    username: 'kennethCodesAllDay',
+    joinDate: 'March 26, 2016',
+    organization: 'freeCodeCamp',
+    friends: [
+      'Sam',
+      'Kira',
+      'Tomo'
+    ],
+    location: {
+      city: 'San Francisco',
+      state: 'CA',
+      country: 'USA'
     }
-    // Only change code above this line
-    return newArr;
+  }
+};
+
+function addFriend(userObj, friend) {
+  // Only change code below this line
+  let friends = userObj.data.friends
+  friends.push(friend)
+  return friends
+  // Only change code above this line
 }
 
-console.log(filteredArray([[3, 2, 3], [1, 6, 3], [3, 13, 26], [19, 3, 9]], 3));
-  
-  
+console.log(addFriend(user, 'Pete'));
