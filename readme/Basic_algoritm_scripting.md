@@ -1,4 +1,4 @@
-## Базовые алгоритмы скриптов
+## Базовые алгоритмы
 
 ### Перевод Цельсия в Фаренгейты
 
@@ -6,9 +6,8 @@
 ```javascript
 function convertToF(celsius) {
 
-  let fahrenheit = (celsius * (9/5) ) + 32;
+  return (celsius * (9/5) ) + 32;
 
-  return fahrenheit;
 }
 
 convertToF(30);
@@ -71,6 +70,7 @@ console.log(findLongestWordLength("The quick brown fox jumped over the lazy dog"
 
 ### Вернуть наибольшее число в массиве
 
+Здесь нужно было пройтись по каждому массиву 2 уровня и найти в нем наибольшее число. Затем составить из этих чисел новые массив и вывести его в результат.
 
 ```javascript
 function largestOfFour(arr) {
@@ -88,7 +88,7 @@ console.log(largestOfFour([[4, 5, 1, 3], [13, 27, 18, 26], [32, 35, 37, 39], [10
 ```
 
 
-### Подтвердить окончание
+### Проверить наличие окончания
 
 
 ```javascript
