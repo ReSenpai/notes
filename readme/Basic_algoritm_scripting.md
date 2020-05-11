@@ -91,6 +91,22 @@ console.log(largestOfFour([[4, 5, 1, 3], [13, 27, 18, 26], [32, 35, 37, 39], [10
 ### Подтвердить окончание
 
 
+```javascript
+function confirmEnding(str, target) {
+
+  const regex = new RegExp(target + '$', 'i');
+
+  return regex.test(str);
+}
+
+confirmEnding("Bastian", "n");
+```
+
+
+### Повторить строку
+
+
+
 
 
 [Вернутся назад](../README.md)

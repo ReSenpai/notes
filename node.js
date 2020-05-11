@@ -1,5 +1,7 @@
-function confirmEnding(str, target) {
+function repeatStringNumTimes(str, num) {
   return str;
 }
 
-console.log(confirmEnding("Bastian", "n"));
+
+
+console.log(repeatStringNumTimes("abc", 3));
