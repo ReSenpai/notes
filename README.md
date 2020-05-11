@@ -6,6 +6,8 @@
 
 [Структура данных](readme/Basic_Data_Structure.md)
 
+[Базовые алгоритмы](readme/Basic_algoritm_scripting.md)
+
 [Vue.js](readme/Vue_js.md)
 
 [Создание Telegram бота на Node.js](readme/node_js_bot.md)
