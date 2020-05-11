@@ -1,7 +1,8 @@
-function repeatStringNumTimes(str, num) {
-  return str;
+function truncateString(str, num) {
+
+  return num < str.length ? `${str.slice(0, num)}...` : str;
+
+
 }
 
-
-
-console.log(repeatStringNumTimes("abc", 3));
+console.log(truncateString("A-tisket a-tasket A green and yellow basket", 8));
