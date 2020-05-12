@@ -138,6 +138,85 @@ console.log(truncateString("A-tisket a-tasket A green and yellow basket", 8));
 ### Искатель сокровища
 
 
+```javascript
+function findElement(arr, func) {
+  for (let i = 0; i < arr.length; i++) {
+    if (func(arr[i])) {
+      return arr[i];
+    }
+  } 
+}
+
+console.log(findElement([1, 2, 3, 4], num => num % 2 === 0));
+```
+
+
+### Провека на тип данных
+
+
+```javascript
+function booWho(bool) {
+  return typeof bool === 'boolean' ? true : false;
+}
+
+booWho(null);
+```
+
+
+### Преобразование слов в предложении
+
+
+```javascript
+function titleCase(str) {
+
+  return str.replace(/\w\S*/g, function(txt) {
+    return txt.charAt(0).toUpperCase() + txt.substring(1).toLowerCase();
+  }
+)
+
+}
+
+console.log(titleCase("I'm a little tea pot"));
+```
+
+
+```javascript
+// Чисто мой код
+
+function titleCase(str) {
+
+  const wordsArr = str.split(' ');
+  let result = '';
+
+  for (let i = 0; i < wordsArr.length; i++) {
+    i === 0 ? result += wordsArr[i][0].toUpperCase() : result += ` ${wordsArr[i][0].toUpperCase()}`
+    result += wordsArr[i].slice(1).toLowerCase()
+  }
+
+  return result;
+}
+
+console.log(titleCase("I'm a little tea pot"));
+```
+
+
+### Нарезать и соединить
+
+
+```javascript
+function frankenSplice(arr1, arr2, n) {
+
+  let result = arr2.slice()
+  
+  result.splice(n, -1, ...arr1)
+
+  return result
+}
+
+console.log(frankenSplice([1, 2, 3], [4, 5, 6], 1));
+```
+
+
 
 
 
