@@ -126,14 +126,17 @@ console.log(repeatStringNumTimes("abc", 3));
 
 
 ```javascript
-function truncateString(str, num) {
+function truncateString = (str, num) => {
   
   return num < str.length ? `${str.slice(0, num)}...` : str;
-
 }
 
 console.log(truncateString("A-tisket a-tasket A green and yellow basket", 8));
 ```
+
+
+### Искатель сокровища
+
 
 
 
