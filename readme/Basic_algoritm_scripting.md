@@ -253,6 +253,8 @@ function bouncer(arr) {
 
 ### Где мое место?
 
+Тут нужно было отсортировать массив и выяснить под каким индексом будет находиться 2 аргумент функции (15).
+
 
 ```javascript
 function getIndexToIns(arr, num) {
@@ -269,8 +271,58 @@ console.log(getIndexToIns([2, 5, 10], 15));
 ```
 
 
-### 
+### Изменение
 
+
+```javascript
+function mutation(arr) {
+
+  let word = arr[1]
+
+  for (let i = 0; i < word.length; i++) {
+    const regex = new RegExp(word[i] , 'i')
+    console.log(regex)
+
+    if (!regex.test(arr[0])) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+
+console.log(mutation(["hello", "oleh"]));
+```
+
+
+### Преобразование 1 мерного массива в несколько 2 мерных
+
+
+```javascript
+function chunkArrayInGroups(arr, size) {
+
+    let newArr = [...arr];
+    let myArr = []
+
+    function arr2D (num) {
+
+        if (num === 0) {
+            return
+        } else {
+            myArr.push(newArr.splice(0,num));
+            newArr.length >= size ? arr2D(size) : arr2D(newArr.length)
+        }
+    }
+
+    arr2D (size)
+
+    return myArr;
+}
+  
+  
+console.log(chunkArrayInGroups(["a", "b", "c", "d"], 2));
+```
 
 
 [Вернутся назад](../README.md)
