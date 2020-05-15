@@ -8,6 +8,8 @@
 
 [Базовые алгоритмы](readme/Basic_algoritm_scripting.md)
 
+[ООП](readme/OOP.md)
+
 [Vue.js](readme/Vue_js.md)
 
 [Создание Telegram бота на Node.js](readme/node_js_bot.md)
