@@ -106,6 +106,38 @@ function Bird() {
 ### Использование конструктора для создания объектов
 
 
+Вот ```Bird``` конструктор из предыдущей задачи:
+
+```javascript
+function Bird() {
+  this.name = "Albert";
+  this.color  = "blue";
+  this.numLegs = 2;
+  // "this" inside the constructor always refers to the object being created
+}
+
+let blueBird = new Bird();
+```
+
+Обратите внимание, что оператор ```new``` используется при вызове конструктора. Это говорит JavaScript-у, что нужно создать новый экземпляр ```Bird``` по названием ```blueBird```. Без оператора ```new```, ```this``` внутри конструктора не указывало бы на вновь созданный объект, давая неожиданные результаты. Теперь ```blueBird``` имеет все свойства, определенные внутри конструктора ```Bird```:
+
+```javascript
+blueBird.name; // => Albert
+blueBird.color; // => blue
+blueBird.numLegs; // => 2
+```
+
+Как и любой другой объект, его свойства могут быть получены и изменены:
+
+```javascript
+blueBird.name = 'Elvira';
+blueBird.name; // => Elvira
+```
+
+
+### Расширение конструкторов для получения аргументов
+
+
 
 
 
