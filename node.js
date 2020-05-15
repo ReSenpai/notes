@@ -1,10 +1,15 @@
-function frankenSplice(arr1, arr2, n) {
-  let result = arr2.slice()
-  result.splice(n, -1, ...arr1)
-  return result
+function bouncer(arr) {
 
-  // return arr2.slice().splice(n, -1, ...arr1);
+  let myArr = [];
+
+  for (let i = 0; i < arr.length; i++) {
+    if (Boolean(arr[i])) {
+      myArr.push(arr[i])
+    }
+  }
+
+  return myArr
 }
 
-console.log(frankenSplice([1, 2, 3], [4, 5, 6], 1));
+console.log(bouncer([false, null, 0, NaN, undefined, ""]));
 

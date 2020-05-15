@@ -167,6 +167,8 @@ booWho(null);
 
 
 ```javascript
+// Украл в интернетах прикольное решение
+
 function titleCase(str) {
 
   return str.replace(/\w\S*/g, function(txt) {
@@ -206,8 +208,8 @@ console.log(titleCase("I'm a little tea pot"));
 ```javascript
 function frankenSplice(arr1, arr2, n) {
 
-  let result = arr2.slice()
-  
+  let result = [...arr2]
+
   result.splice(n, -1, ...arr1)
 
   return result
@@ -215,6 +217,41 @@ function frankenSplice(arr1, arr2, n) {
 
 console.log(frankenSplice([1, 2, 3], [4, 5, 6], 1));
 ```
+
+
+### Вышибала ложных значений
+
+
+```javascript
+// мое решение
+
+function bouncer(arr) {
+
+  let myArr = [];
+
+  for (let i = 0; i < arr.length; i++) {
+    if (Boolean(arr[i])) {
+      myArr.push(arr[i])
+    }
+  }
+
+  return myArr
+}
+
+console.log(bouncer([false, null, 0, NaN, undefined, ""]));
+```
+
+
+```javascript
+// некст лвл
+
+function bouncer(arr) {
+  return arr.filter(Boolean);
+}
+```
+
+
+### Где мое место?
 
 
 
