@@ -1,15 +1,12 @@
-function bouncer(arr) {
+function getIndexToIns(arr, num) {
 
-  let myArr = [];
+  arr.push(num)
+  arr.sort(function(a, b) {
+    return a - b;
+  });
 
-  for (let i = 0; i < arr.length; i++) {
-    if (Boolean(arr[i])) {
-      myArr.push(arr[i])
-    }
-  }
-
-  return myArr
+  return arr.indexOf(num)
 }
 
-console.log(bouncer([false, null, 0, NaN, undefined, ""]));
+console.log(getIndexToIns([2, 5, 10], 15));
 
