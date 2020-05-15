@@ -325,4 +325,23 @@ console.log(chunkArrayInGroups(["a", "b", "c", "d"], 2));
 ```
 
 
+### Мерж массивов
+
+
+```javascript
+//Ласт задание спервого тура ШРИ
+
+function merge(nums1, n, nums2, m) {
+
+    nums1.splice(n, m, ...nums2)
+    nums1.sort(function(a, b) {
+        return a - b;
+    });
+    return nums1
+} 
+  
+console.log(merge([46,55,88,0,0,0,0], 3, [18,29,80,90], 4));
+```
+
+
 [Вернутся назад](../README.md)
