@@ -301,6 +301,37 @@ console.log(prototypeProps); // prints ["numLegs"]
 ### Понятие - свойства конструктора
 
 
+Существую специальное свойство конструктора (```constructor```), расположенное на экземплярах объекта ```duck``` и ```beagle```, созданных в предыдущих задачах:
+
+```javascript
+for (let property in duck) {
+  if(duck.hasOwnProperty(property)) {
+    ownProps.push(property);
+  } else {
+    prototypeProps.push(property);
+  }
+}
+```
+
+Обратите внимание, что свойство ```constructor``` является ссылкой на функцию конструктора, который создал этот экземпляр. Приемущество свойства ```constructor``` заключается в том, что можно проверить это свойство для понимания, что это за объект. Вот пример того, как это можно было бы использовать:
+
+```javascript
+function joinBirdFraternity(candidate) {
+  if (candidate.constructor === Bird) {
+    return true;
+  } else {
+    return false;
+  }
+}
+```
+
+Внимание
+Поскольу свойство ```constructor``` может быть перезаписано (что будет рассмотрено в следующих двух задачах), обычно лучше использовать метод ```instanceof``` для проверки типа объекта.
+
+
+### Изменение ```prototype``` на новом объекте
+
+
 
 
 
