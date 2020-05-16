@@ -329,7 +329,43 @@ function joinBirdFraternity(candidate) {
 Поскольу свойство ```constructor``` может быть перезаписано (что будет рассмотрено в следующих двух задачах), обычно лучше использовать метод ```instanceof``` для проверки типа объекта.
 
 
-### Изменение ```prototype``` на новом объекте
+### Изменение ```prototype``` на новый объект
+
+
+До сих пор вы добавляли свойства к ```prototype``` по отдельности:
+
+```javascript
+Bird.prototype.numLegs = 2;
+```
+
+Это станет утомительным, если нужно будет добавить более пары свойств:
+
+```javascript
+Bird.prototype.eat = function() {
+  console.log("nom nom nom");
+}
+
+Bird.prototype.describe = function() {
+  console.log("My name is " + this.name);
+}
+```
+
+Более эффективным способом является установка ```prototype``` как новый объект, который уже содержит свойства. Таким образом можно добавить сразу множество свойств:
+
+```javascript
+Bird.prototype = {
+  numLegs: 2, 
+  eat: function() {
+    console.log("nom nom nom");
+  },
+  describe: function() {
+    console.log("My name is " + this.name);
+  }
+};
+```
+
+
+### Не забывайте устанавливать свойство ```constructor``` при изменение ```prototype```
 
 
 
