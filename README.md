@@ -10,6 +10,8 @@
 
 [ООП](readme/OOP.md)
 
+[Функциональное программирование](readme/Functional_Programming.md)
+
 [Vue.js](readme/Vue_js.md)
 
 [Создание Telegram бота на Node.js](readme/node_js_bot.md)
