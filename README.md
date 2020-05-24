@@ -20,6 +20,7 @@
     * [Базовые операции](readme/SQL_step1.md)
     * [Выборки из нескольких источников](readme/SQL_step2.md)
 
+[Решение задач с Codewars](readme/codewars.md)
 
 https://resenpai.github.io/notes/dist/
 
