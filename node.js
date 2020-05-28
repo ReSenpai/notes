@@ -1,60 +1,23 @@
 
-// console.log( ({}).prototype === ({}).__proto__ ) //false
 
-// function ITkamasutra() {}
-// console.log( ITkamasutra.prototype === ITkamasutra.__proto__ ) // false
+function binarySearch(arr, item) {
 
-// function ITincubator() {}
-// console.log(ITincubator.prototype === ITkamasutra.prototype) // false
-// console.log(ITincubator.__proto__ === ITkamasutra.__proto__) // true
+  let start = 0;
+  let end = arr.length - 1;
 
-
-
-// let Component = (props) => {
-//   return `olololo`
-// }
-// console.log(Component.prototype === Object.prototype) // false
-
-
-
-// let age = 18
-// console.log(age.prototype === Number.prototype) // false
-// console.log(age.__proto__ === Number.prototype) //true
-
-
-// class Hacker {}
-// console.log(Hacker.__proto__ === Function.prototype) //true
-
-
-
-// console.log(ITincubator.__proto__) //function
-// console.log(age.__proto__) //number
-
-/* 
-1. false
-2. false
-3. false
-4. true
-5. false
-6. false
-7. true
-8. true
-9. function
-10. number
-*/
-
-
-class Samurai {
-  constructor(name) {
-    this.name = name
+  while (start <= end) {
+    let mid = Math.round((start + end) / 2)
+    let guess = arr[mid]
+    if (guess == item) {
+      return mid
+    } else if (guess > item) {
+      end = mid - 1
+    } else {
+      start = mid + 1
+    }
   }
-  hello() {
-    alert(this.name)
-  }
+  return 'тут нихера нет'
 }
 
-let shogun = new Samurai('Re Senpai')
-console.log(shogun.__proto__.__proto__ === Samurai.prototype.__proto__)
-console.log(shogun.__proto__.constructor.__proto__ === Function.prototype)
-console.log(shogun.__proto__.__proto__.__proto__ === null)
-debugger
+
+console.log(binarySearch([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20], 19))
