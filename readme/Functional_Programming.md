@@ -28,9 +28,247 @@
 
 3. Функции с ограниченными побочными эффеками - любые изменения или мутации состояния программы вне функции тщательно контролируются
 
+```javascript
+// Function that returns a string representing a cup of green tea
+const prepareTea = () => 'greenTea';
 
+/*
+Given a function (representing the tea type) and number of cups needed, the
+following function returns an array of strings (each representing a cup of
+a specific type of tea).
+*/
+const getTea = (numOfCups) => {
+  const teaCups = [];
+
+  for(let cups = 1; cups <= numOfCups; cups += 1) {
+    const teaCup = prepareTea();
+    teaCups.push(teaCup);
+  }
+  return teaCups;
+};
+
+// Only change code below this line
+const tea4TeamFCC = null;
+// Only change code above this line
+```
 
 ## Понимание терминологии функционального программирования
+
+У команды FCC был пересмотр предпочтений и теперь она хочет 2 вида чая: зеленый чай и черный чай. Общий факт: перепады настроения клиентов довольно распространены.
+
+С этой информацией нам нужно будет вернутся к функции ```getTea``` из предыдущего задания для обработки различных запросов на чай. Мы можем изменить ```getTea```, чтобы принять функцию в качестве параметра, чтобы иметь возможность изменить тип чая, который она готовит. Это делает ```getTea``` более гибким и дает программисту больше контроля при изменении запросов клиента.
+
+
+Но сначала давайте рассмотрим некоторую функциональную терминологию:
+
+```Callbacks``` это функции, которые перемещаются или передаются в другую функцию, чтобы решить вызов этой функции. Возможно, вы видели, как они передавались другим методам, например в ```filter```, функция обратного вызова сообщает JavaScript критерии для фильтрации массива.
+
+Функции, которые могут быть назначены переменной, переданы в другую функцию или возвращены из другой функции, как и любое другое нормальное значение, называются функциями первого класса. В JavaScript все функции являются функциями первого класса.
+
+Функции, которые принимают функции в качестве аргументов или возвращают функции в качестве возвращаемого значения, называютя функциями высшего порядка.
+
+Когда функции передаются в другую функцию или возвращаются из другой функции, то те функции, которые передаются или возвращаются, могут называтся лямбда.
+
+
+```javascript
+// Function that returns a string representing a cup of green tea
+const prepareGreenTea = () => 'greenTea';
+
+// Function that returns a string representing a cup of black tea
+const prepareBlackTea = () => 'blackTea';
+
+/*
+Given a function (representing the tea type) and number of cups needed, the
+following function returns an array of strings (each representing a cup of
+a specific type of tea).
+*/
+const getTea = (prepareTea, numOfCups) => {
+  const teaCups = [];
+
+  for(let cups = 1; cups <= numOfCups; cups += 1) {
+    const teaCup = prepareTea();
+    teaCups.push(teaCup);
+  }
+  return teaCups;
+};
+
+// Only change code below this line
+const tea4GreenTeamFCC = getTea(prepareGreenTea, 27);
+const tea4BlackTeamFCC = getTea(prepareBlackTea, 13);
+// Only change code above this line
+
+console.log(
+  tea4GreenTeamFCC,
+  tea4BlackTeamFCC
+);
+```
+
+
+## Понимание опасности использования императивного кода
+
+
+Функциональное программирование - это хорошая привычка. Это позволяет легко управлять вашим кодом и избавляет вас от подлых ошибок. Но прежде чем мы доберемся до этого, давайте рассмотрим императивный подход к программированию, чтобы выделить, где у вас могут быть проблемы.
+
+В английском (и многих других языках) императивное время используется для передчами команд. Точно так же императивный стиль в программировании - это тот, который дает компьютеру набор операторов для выполнения задач.
+
+Часто операторы изменяют состояние программы, например обновляют глобальные переменные. Класический пример - это цикл ```for```, который дает точные указания для перебора индексов массива.
+
+Функциональное программирование, напротив, является формой декларативного программирования. Вы сообщаете компьютеру, что вы хотите сделать, вызывая метод или функцию.
+
+JavaScript предлагает множество предопределенных методов, которые обрабатывают общие задачи, поэтому вам не нужно писать, как компьютер должен их выполнить. Например, вместо использования цикла ```for```, упомянутого выше, вы можете вызвать метод ```map```, который обрабатывает детали итерации по массиву. Это помогает избежать семантических ошибок, таких как "Off by One Errors", которые были рассмотрены в разделе отладки.
+
+Рассмотрим ситуацию: когда вы просматриваете страницы в интернете в вашем браузере, и хотите отслеживать вкладки, которые вы открыли. Давайте попробуем смоделировать это с помощью простого ООП кода.
+
+Объект Window состоит из вкладок, и обычно открыто несколько Window. Заголовки каждого открытого сайта в каждом объекте Window хранятся в массиве. После работы в браузере (открытие новых вкладок, объединения окон и закрытия вкладок) необходимо распечатать вкладки, которые все еще открыты. Закрытые вкладки удаляются из массива, а новые вкладки (для простоты) добавляются в его конец.
+
+Редактор кода показывает реализацию этой функции с функциями ```tabOpen()```, ```tabClose()``` и ```join()```. Массив ```tabs``` - это часть объекта Window, в котором хранятся имена открытых страниц.
+
+
+```javascript
+let Window = function(tabs) { // конструктор
+  this.tabs = tabs; 
+};
+
+Window.prototype.join = function (otherWindow) {  // метод join - соединяет массива из табс с массивом, передаваемым в метод
+  this.tabs = this.tabs.concat(otherWindow.tabs);
+  return this;
+};
+
+Window.prototype.tabOpen = function (tab) {
+  this.tabs.push('new tab'); // Пушит в массив новый элемент 'new tab'
+  return this;
+};
+
+Window.prototype.tabClose = function (index) { // метод закрытия вкладок
+  // Only change code below this line
+  var tabsBeforeIndex = this.tabs.splice(0, index); // Берет вкладки перед табом
+  var tabsAfterIndex = this.tabs.splice(1); // Получает вкладки после таба
+  this.tabs = tabsBeforeIndex.concat(tabsAfterIndex); // Join them together
+  // Only change code above this line
+  return this;
+ };
+
+// Let's create three browser windows
+var workWindow = new Window(['GMail', 'Inbox', 'Work mail', 'Docs', 'freeCodeCamp']); // Your mailbox, drive, and other work sites
+var socialWindow = new Window(['FB', 'Gitter', 'Reddit', 'Twitter', 'Medium']); // Social sites
+var videoWindow = new Window(['Netflix', 'YouTube', 'Vimeo', 'Vine']); // Entertainment sites
+
+// Now perform the tab opening, closing, and other operations
+var finalTabs = socialWindow
+  .tabOpen() // Open a new tab for cat memes
+  .join(videoWindow.tabClose(2)) // Close third tab in video window, and join
+  .join(workWindow.tabClose(1).tabOpen());
+console.log(`${finalTabs.tabs}
+--------------------------------------------------------------------------------------------------
+${['FB', 'Gitter', 'Reddit', 'Twitter', 'Medium', 'new tab', 'Netflix', 'YouTube', 'Vine', 'GMail', 'Work mail', 'Docs', 'freeCodeCamp', 'new tab']}`);  
+```
+
+
+## Избегайте мутаций и побочных эффектов с помощью функционального программирования
+
+
+Если вы еще не поняли этого, проблема в предыдущей задаче заключалась в вызове соединения в функции ```tabClose```. К сожалению ```splice``` изменяет исходный массив, на который он вызывается, поэтому второй вызов к нему использовал модифицированный массив и дал неожиданный результат.
+
+
+Это небольшой пример гораздо большего шаблона - вы вызываете функцию для переменной, массива или объекта, и функция изменяет переменную или что-то в объекте.
+
+
+Один из основных принципов функционального программирования заключается в том, чтобы ничего не менять. Изменения приводят к ошибкам. Проще предотвратить ошибки, зная, что ваши функции ничего не меняют, включая аргументы функции или любую глобальную переменную.
+
+В предыдущем примере не было никаких сложных операций, но метод ```splice``` изменил исходный массив и привел к ошибке.
+
+Напомним, что в функциональном программировании изменение или изменение вещей называется мутацией, а результат - называется побочным эффектом. Функция в идеале, должна быть чистой функцией, то есть она не вызывает никаких побочных эффектов.
+
+Давайте попробуем освоить эту дисциплину и не изменять ни одну переменную или объект в нашем коде.
+
+
+```javascript
+// The global variable
+var fixedValue = 4;
+
+function incrementer () {
+  // Only change code below this line
+  let result = fixedValue + 1;
+  return result;
+
+  // Only change code above this line
+}
+```
+
+
+## Передайте аргументы, чтобы избежать внешней зависимости а функции
+
+
+Последняя задача была на шаг ближе к принципам функционального програмирования, но все же чего-то не хватает. 
+
+Мы не изменили значение глобальной переменной, но функция ```incrementer``` не будет работать без наличия глобальное переменной ```fixedValue```. 
+
+Другой принцип функционального программирования - всегда объявлять свои зависимости явно. Это означает, что если функция зависит от наличия переменной или объекта, то передайте эту переменную или объект непосредственно в функцию в качестве аргумента.
+
+Из этого принципа вытекает несколького хороших следствий. Эту функцию легче проверить, вы точно знаете, какие входные данные она принимает, и она не будет зависеть ни от чего другого в вашей программе.
+
+Это может дать вам больше уверенности, когда вы изменяете, удаляете или добавляете новый код. Вы будете знать, что вы можете или не можете изменить, и вы можете видеть, где находятся потенциальные ловушки.
+
+Наконец, функция всегда будет выдавать один и тот же результат для одного и того же набора входных данных, независимо от того, какая часть кода ее выполняет.
+
+
+```javascript
+// The global variable
+var fixedValue = 4;
+
+// Only change code below this line
+function incrementer (value) {
+
+  return value + 1
+  // Only change code above this line
+}
+```
+
+
+## Рефракторинг глобальных переменных из функций
+
+
+До сих пор мы видели два различных принципа функционального программирования:
+
+1. Не изменяй переменную или объект - создавайте новые переменные и объекты и возвращайте их, если это необходимо, из функции.
+
+2. Объявить аргументы функции - любое вычисление внутри функции зависит только от аргументов, а не от какого-либо глобального объекта или переменной.
+
+
+Добавление еденицы к числу не очень увлекательно, но мы можем применять эти принципы при работе с массивами или более сложными объектами.
+
+
+```javascript
+var bookList = ["The Hound of the Baskervilles", "On The Electrodynamics of Moving Bodies", "Philosophiæ Naturalis Principia Mathematica", "Disquisitiones Arithmeticae"];
+
+function add (bookName, item) {
+
+  let newArr = [...bookName]
+  newArr.push(item);
+
+  return newArr;
+}
+
+function remove (bookName, item) {
+
+  let newArr = [...bookName];
+  var book_index = newArr.indexOf(item);
+
+  if (book_index >= 0) {
+    newArr.splice(book_index, 1);
+    return newArr;
+  }
+}
+
+var newBookList = add(bookList, 'A Brief History of Time');
+var newerBookList = remove(bookList, 'On The Electrodynamics of Moving Bodies');
+var newestBookList = remove(add(bookList, 'A Brief History of Time'), 'On The Electrodynamics of Moving Bodies');
+
+console.log(bookList);
+```
+
+
+## Использование метода map для извлечения данных из массива
 
 
 
