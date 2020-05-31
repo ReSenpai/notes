@@ -301,7 +301,7 @@ console.log(names); // [ 'John', 'Amy', 'camperCat' ]
 ```
 
 <details>
-  <summary>Более круто пример</summary>
+  <summary>Более крутой пример</summary>
 
 ```javascript
 // The global variable
@@ -466,7 +466,307 @@ console.log(new_s);
 ```
 
 
-## 
+## используйте метод ```filter``` для извлечения данных из массива
+
+
+Еще одна полезная функция массива ```Array.prototype.filter()``` или просто ```filter()```.
+
+```filter``` вызывает функцию для каждого элемента массива и возвращает новый массив, содержащий только те элементы, для которых эта функция возвращает ```true```. Другими словами, он фильтрует массив, основываясь на переданной ему функции. Как и ```map```, он делает это без необходимости менять исходный массив.
+
+Функция обрартного вызова принимает 3 аргумента:
+
+1. Первый аргумент - это текущий обрабатываемый элемент.
+2. Второй - это индек этого элемент.
+3. Массив, на котором был вызван метод фильтра
+
+
+Ниже приведен пример использования метода ```filter``` в массиве ```users``` для возврата нового массива, содержащего только пользователей в возрасте до 30 лет. Для простоты в примере используется только первый аргумент обратного вызова.
+
+
+```javascript
+const users = [
+  { name: 'John', age: 34 },
+  { name: 'Amy', age: 20 },
+  { name: 'camperCat', age: 10 }
+];
+
+const usersUnder30 = users.filter(user => user.age < 30);
+console.log(usersUnder30); // [ { name: 'Amy', age: 20 }, { name: 'camperCat', age: 10 } ]
+```
+
+<details>
+  <summary>Более крутой пример</summary>
+
+```javascript
+const watchList = [
+  {
+    "Title": "Inception",
+    "Year": "2010",
+    "Rated": "PG-13",
+    "Released": "16 Jul 2010",
+    "Runtime": "148 min",
+    "Genre": "Action, Adventure, Crime",
+    "Director": "Christopher Nolan",
+    "Writer": "Christopher Nolan",
+    "Actors": "Leonardo DiCaprio, Joseph Gordon-Levitt, Ellen Page, Tom Hardy",
+    "Plot": "A thief, who steals corporate secrets through use of dream-sharing technology, is given the inverse task of planting an idea into the mind of a CEO.",
+    "Language": "English, Japanese, French",
+    "Country": "USA, UK",
+    "Awards": "Won 4 Oscars. Another 143 wins & 198 nominations.",
+    "Poster": "http://ia.media-imdb.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_SX300.jpg",
+    "Metascore": "74",
+    "imdbRating": "8.8",
+    "imdbVotes": "1,446,708",
+    "imdbID": "tt1375666",
+    "Type": "movie",
+    "Response": "True"
+  },
+  {
+    "Title": "Interstellar",
+    "Year": "2014",
+    "Rated": "PG-13",
+    "Released": "07 Nov 2014",
+    "Runtime": "169 min",
+    "Genre": "Adventure, Drama, Sci-Fi",
+    "Director": "Christopher Nolan",
+    "Writer": "Jonathan Nolan, Christopher Nolan",
+    "Actors": "Ellen Burstyn, Matthew McConaughey, Mackenzie Foy, John Lithgow",
+    "Plot": "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.",
+    "Language": "English",
+    "Country": "USA, UK",
+    "Awards": "Won 1 Oscar. Another 39 wins & 132 nominations.",
+    "Poster": "http://ia.media-imdb.com/images/M/MV5BMjIxNTU4MzY4MF5BMl5BanBnXkFtZTgwMzM4ODI3MjE@._V1_SX300.jpg",
+    "Metascore": "74",
+    "imdbRating": "8.6",
+    "imdbVotes": "910,366",
+    "imdbID": "tt0816692",
+    "Type": "movie",
+    "Response": "True"
+  },
+  {
+    "Title": "The Dark Knight",
+    "Year": "2008",
+    "Rated": "PG-13",
+    "Released": "18 Jul 2008",
+    "Runtime": "152 min",
+    "Genre": "Action, Adventure, Crime",
+    "Director": "Christopher Nolan",
+    "Writer": "Jonathan Nolan (screenplay), Christopher Nolan (screenplay), Christopher Nolan (story), David S. Goyer (story), Bob Kane (characters)",
+    "Actors": "Christian Bale, Heath Ledger, Aaron Eckhart, Michael Caine",
+    "Plot": "When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, the caped crusader must come to terms with one of the greatest psychological tests of his ability to fight injustice.",
+    "Language": "English, Mandarin",
+    "Country": "USA, UK",
+    "Awards": "Won 2 Oscars. Another 146 wins & 142 nominations.",
+    "Poster": "http://ia.media-imdb.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_SX300.jpg",
+    "Metascore": "82",
+    "imdbRating": "9.0",
+    "imdbVotes": "1,652,832",
+    "imdbID": "tt0468569",
+    "Type": "movie",
+    "Response": "True"
+  },
+  {
+    "Title": "Batman Begins",
+    "Year": "2005",
+    "Rated": "PG-13",
+    "Released": "15 Jun 2005",
+    "Runtime": "140 min",
+    "Genre": "Action, Adventure",
+    "Director": "Christopher Nolan",
+    "Writer": "Bob Kane (characters), David S. Goyer (story), Christopher Nolan (screenplay), David S. Goyer (screenplay)",
+    "Actors": "Christian Bale, Michael Caine, Liam Neeson, Katie Holmes",
+    "Plot": "After training with his mentor, Batman begins his fight to free crime-ridden Gotham City from the corruption that Scarecrow and the League of Shadows have cast upon it.",
+    "Language": "English, Urdu, Mandarin",
+    "Country": "USA, UK",
+    "Awards": "Nominated for 1 Oscar. Another 15 wins & 66 nominations.",
+    "Poster": "http://ia.media-imdb.com/images/M/MV5BNTM3OTc0MzM2OV5BMl5BanBnXkFtZTYwNzUwMTI3._V1_SX300.jpg",
+    "Metascore": "70",
+    "imdbRating": "8.3",
+    "imdbVotes": "972,584",
+    "imdbID": "tt0372784",
+    "Type": "movie",
+    "Response": "True"
+  },
+  {
+    "Title": "Avatar",
+    "Year": "2009",
+    "Rated": "PG-13",
+    "Released": "18 Dec 2009",
+    "Runtime": "162 min",
+    "Genre": "Action, Adventure, Fantasy",
+    "Director": "James Cameron",
+    "Writer": "James Cameron",
+    "Actors": "Sam Worthington, Zoe Saldana, Sigourney Weaver, Stephen Lang",
+    "Plot": "A paraplegic marine dispatched to the moon Pandora on a unique mission becomes torn between following his orders and protecting the world he feels is his home.",
+    "Language": "English, Spanish",
+    "Country": "USA, UK",
+    "Awards": "Won 3 Oscars. Another 80 wins & 121 nominations.",
+    "Poster": "http://ia.media-imdb.com/images/M/MV5BMTYwOTEwNjAzMl5BMl5BanBnXkFtZTcwODc5MTUwMw@@._V1_SX300.jpg",
+    "Metascore": "83",
+    "imdbRating": "7.9",
+    "imdbVotes": "876,575",
+    "imdbID": "tt0499549",
+    "Type": "movie",
+    "Response": "True"
+  }
+];
+
+
+let filteredList = watchList.filter(film => film.imdbRating > 8).map(element => {
+  return {title: element["Title"],  rating: element["imdbRating"]}
+})
+
+console.log(filteredList);
+```
+</details>
+
+
+## Реализовать метод filter на прототипе
+
+
+Это расскажет нам многое о методе ```filter```, если мы попытаемся реализовать его версию, которая ведет себя точно так же, как и ```Array.prototype.filter()```. Он может использовать либо цикл ```for```, либо  ```Array.prototype.forEach()```.
+
+Обратите внимание, что чистая функция может изменять локальные переменные, определенные в ее области, хотя предпочтительно также избегать этого.
+
+
+```javascript
+const s = [23, 65, 98, 5];
+
+Array.prototype.myFilter = function(callback){
+
+  let copyArray = [...this];
+  let newArray = [];
+
+  copyArray.forEach(element => {
+    if (callback(element)) {
+      newArray.push(element)
+    }
+  });
+
+  return newArray;
+};
+
+let new_s = s.myFilter(function(item){
+  return item % 2 === 1;
+});
+
+console.log(new_s)
+```
+
+
+## Возвращаем часть массива с помощью метода ```slice```
+
+
+Метод ```slice``` возвращает копию определенных элементов массива. Он может принимать 2 аргумента:
+
+1. Первый дает индекс того, где начать срез
+2. Второй индекс того, где закончить срез (и он не включает себя)
+
+Если аргументы не указаны, то по умолчанию следует начинать с начала массива через конец, что является простым способом сделать копию всего массива. Метод ```slice``` не изменяет исходный массив, но возвращает новый.
+
+Вот такой пример:
+
+```javascript
+var arr = ["Cat", "Dog", "Tiger", "Zebra"];
+var newArray = arr.slice(1, 3);
+// Sets newArray to ["Dog", "Tiger"]
+```
+
+<details>
+  <summary>Более крутой пример</summary>
+
+```javascript
+function sliceArray(anim, beginSlice, endSlice) {
+
+  return anim.slice(beginSlice, endSlice)
+}
+
+let inputAnim = ["Cat", "Dog", "Tiger", "Zebra", "Ant"];
+
+
+console.log(sliceArray(inputAnim, 1, 3))
+console.log(inputAnim)
+```
+
+</details>
+
+
+## Удалить элементы из массива, используя ```slice``` вместо ```splice```
+
+
+Общая закономерность при работе с массивами, когда вы хотите удалить элементы и сохранить остальную часть массива. JavaScript предлагает метод ```splice``` для этого, который принимает аргументы для индекса, с какого места начать удаление, а затем количество элементов для удаления. Если второй аргумент не указан, по умолчанию элементы удаляются до конца. Однако метод ```splice``` изменяет исходный массив, на котором он вызывается. Вот вам пример:
+
+```javascript
+var cities = ["Chicago", "Delhi", "Islamabad", "London", "Berlin"];
+cities.splice(3, 1); // Returns "London" and deletes it from the cities array
+// cities is now ["Chicago", "Delhi", "Islamabad", "Berlin"]
+```
+
+Как мы видели в последней задаче, метод ```slice``` не мутирует исходный массив, а возвращает новый, который может быть сохранен в переменную. Напомним, что метод ```slice``` принимает 2 аргумента для индексов, чтобы начать и закончить срез (конец не является инклюзивным), и возвращает эти элементы в новом массиве. Использование метода ```slice``` вместо ```splice``` помогает избежать любых побочных эффектов, связанных с мутацией массива.
+
+
+```javascript
+function nonMutatingSplice(cities) {
+
+  return cities.slice(0, 3);
+}
+
+const inputCities = ["Chicago", "Delhi", "Islamabad", "London", "Berlin"];
+nonMutatingSplice(inputCities);
+
+console.log(nonMutatingSplice(inputCities))
+console.log(inputCities)
+```
+
+
+## Объедините два массива с помощью метода ```concat```
+
+
+Конкатенация означает соединение элементов из конца в конец. JavaScript предлагает метод ```concat``` для строк и массивов, который работает таким же образом. Для массивов метод вызывается на одном, затем в качестве аргумента для ```concat``` предоставляется другой массив, который добавляется в конец первого массива. Он возвращает новый массив и не мутирует ни один из исходных массивов.
+
+Вот вам пример:
+
+```javascript
+[1, 2, 3].concat([4, 5, 6]);
+// Returns a new array [1, 2, 3, 4, 5, 6]
+```
+
+
+## Добавление элементов в конец массива с помощью ```concat``` вместо ```push```
+
+Функциональное программирование - это все о создании и использовании немутирующих функций.
+
+Последняя задача представила метод ```concat``` как способ объединения массивов в новый без изменения исходных массивов. Сравните ```concat``` с методом ```push```. ```push``` добавляет элемент в конец того же массива, на который он вызывается, что изменяет этот массив. 
+
+Пример:
+
+```javascript
+var arr = [1, 2, 3];
+arr.push([4, 5, 6]);
+// arr is changed to [1, 2, 3, [4, 5, 6]]
+// Not the functional programming way
+```
+
+```concat``` предлагает способ добавления новых элементов в конец массива без каких либо мутирующих побочных эффектов.
+
+
+```javascript
+function nonMutatingPush(original, newItem) {
+
+  return original.concat(newItem);
+}
+
+const first = [1, 2, 3];
+const second = [4, 5];
+
+nonMutatingPush(first, second);
+console.log(nonMutatingPush(first, second))
+```
+
+
+## Используйте метод ```reduce``` для анализа данных
+
+
 
 
 
