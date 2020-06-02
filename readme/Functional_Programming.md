@@ -766,7 +766,479 @@ console.log(nonMutatingPush(first, second))
 
 ## Используйте метод ```reduce``` для анализа данных
 
+```Array.prototype.reduce()```, или просто ```reduce()```, является наиболее общей из всех операций с массивами в JavaScript. Вы можете решить практически любую проблему обработки массива с помощью метода ```reduce```.
 
+Метод ```reduce``` позволяет использовать более общие формы обработки массива, и можно показать, что как ```filter``` , так и ```map``` могут быть получены как специальное приложение ```reduce```. Метод ```reduce``` выполняет итерацию по каждому элементу массива и возвращает одно значение (например строку, число, объект, массив). Это достигается с помощью функции обратного вызова, которая вызывается на каждой итерации.
+
+Функция обратного вызова принимает 4 аргумента:
+
+1. Первый аргумнт известен как накопитель (accumulator), которому присваивается возвращаемое значение функции обратного вызова из предыдущей итерации
+2. Второй - это обрабатываемый текущий элемент
+3. Третий - это индекс этого элемента
+4. А четвертый - массив, на котором вызывается ```reduce```
+
+
+В дополнение к функции обратного вызова, ```reduce``` имеет дополнительный параметр, который принимает начальное значение для накопителя(accumulator). Если этот второй параметр не используется, то первая итерация пропускается, а вторая итерация передает первый элемент массива в качестве накопителя.
+
+Ниже приведен пример использования функции ```reduce``` в массиве ```users``` для возврата суммы всех возрастов пользователей. Для простоты в примере используются только первый и второй аргументы.
+
+```javascript
+const users = [
+  { name: 'John', age: 34 },
+  { name: 'Amy', age: 20 },
+  { name: 'camperCat', age: 10 }
+];
+
+const sumOfAges = users.reduce((sum, user) => sum + user.age, 0);
+console.log(sumOfAges); // 64
+```
+
+В другом примере показано, как можно вернуть объект, содержащий имена пользователей в качестве свойств и их возраст в качестве значений.
+
+
+```javascript
+const users = [
+  { name: 'John', age: 34 },
+  { name: 'Amy', age: 20 },
+  { name: 'camperCat', age: 10 }
+];
+
+const usersObj = users.reduce((obj, user) => {
+  obj[user.name] = user.age;
+  return obj;
+}, {});
+console.log(usersObj); // { John: 34, Amy: 20, camperCat: 10 }
+```
+
+
+<details>
+  <summary>Более крутой пример</summary>
+
+```javascript
+
+const watchList = [
+  {
+    "Title": "Inception",
+    "Year": "2010",
+    "Rated": "PG-13",
+    "Released": "16 Jul 2010",
+    "Runtime": "148 min",
+    "Genre": "Action, Adventure, Crime",
+    "Director": "Christopher Nolan",
+    "Writer": "Christopher Nolan",
+    "Actors": "Leonardo DiCaprio, Joseph Gordon-Levitt, Ellen Page, Tom Hardy",
+    "Plot": "A thief, who steals corporate secrets through use of dream-sharing technology, is given the inverse task of planting an idea into the mind of a CEO.",
+    "Language": "English, Japanese, French",
+    "Country": "USA, UK",
+    "Awards": "Won 4 Oscars. Another 143 wins & 198 nominations.",
+    "Poster": "http://ia.media-imdb.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_SX300.jpg",
+    "Metascore": "74",
+    "imdbRating": "8.8",
+    "imdbVotes": "1,446,708",
+    "imdbID": "tt1375666",
+    "Type": "movie",
+    "Response": "True"
+  },
+  {
+    "Title": "Interstellar",
+    "Year": "2014",
+    "Rated": "PG-13",
+    "Released": "07 Nov 2014",
+    "Runtime": "169 min",
+    "Genre": "Adventure, Drama, Sci-Fi",
+    "Director": "Christopher Nolan",
+    "Writer": "Jonathan Nolan, Christopher Nolan",
+    "Actors": "Ellen Burstyn, Matthew McConaughey, Mackenzie Foy, John Lithgow",
+    "Plot": "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.",
+    "Language": "English",
+    "Country": "USA, UK",
+    "Awards": "Won 1 Oscar. Another 39 wins & 132 nominations.",
+    "Poster": "http://ia.media-imdb.com/images/M/MV5BMjIxNTU4MzY4MF5BMl5BanBnXkFtZTgwMzM4ODI3MjE@._V1_SX300.jpg",
+    "Metascore": "74",
+    "imdbRating": "8.6",
+    "imdbVotes": "910,366",
+    "imdbID": "tt0816692",
+    "Type": "movie",
+    "Response": "True"
+  },
+  {
+    "Title": "The Dark Knight",
+    "Year": "2008",
+    "Rated": "PG-13",
+    "Released": "18 Jul 2008",
+    "Runtime": "152 min",
+    "Genre": "Action, Adventure, Crime",
+    "Director": "Christopher Nolan",
+    "Writer": "Jonathan Nolan (screenplay), Christopher Nolan (screenplay), Christopher Nolan (story), David S. Goyer (story), Bob Kane (characters)",
+    "Actors": "Christian Bale, Heath Ledger, Aaron Eckhart, Michael Caine",
+    "Plot": "When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, the caped crusader must come to terms with one of the greatest psychological tests of his ability to fight injustice.",
+    "Language": "English, Mandarin",
+    "Country": "USA, UK",
+    "Awards": "Won 2 Oscars. Another 146 wins & 142 nominations.",
+    "Poster": "http://ia.media-imdb.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_SX300.jpg",
+    "Metascore": "82",
+    "imdbRating": "9.0",
+    "imdbVotes": "1,652,832",
+    "imdbID": "tt0468569",
+    "Type": "movie",
+    "Response": "True"
+  },
+  {
+    "Title": "Batman Begins",
+    "Year": "2005",
+    "Rated": "PG-13",
+    "Released": "15 Jun 2005",
+    "Runtime": "140 min",
+    "Genre": "Action, Adventure",
+    "Director": "Christopher Nolan",
+    "Writer": "Bob Kane (characters), David S. Goyer (story), Christopher Nolan (screenplay), David S. Goyer (screenplay)",
+    "Actors": "Christian Bale, Michael Caine, Liam Neeson, Katie Holmes",
+    "Plot": "After training with his mentor, Batman begins his fight to free crime-ridden Gotham City from the corruption that Scarecrow and the League of Shadows have cast upon it.",
+    "Language": "English, Urdu, Mandarin",
+    "Country": "USA, UK",
+    "Awards": "Nominated for 1 Oscar. Another 15 wins & 66 nominations.",
+    "Poster": "http://ia.media-imdb.com/images/M/MV5BNTM3OTc0MzM2OV5BMl5BanBnXkFtZTYwNzUwMTI3._V1_SX300.jpg",
+    "Metascore": "70",
+    "imdbRating": "8.3",
+    "imdbVotes": "972,584",
+    "imdbID": "tt0372784",
+    "Type": "movie",
+    "Response": "True"
+  },
+  {
+    "Title": "Avatar",
+    "Year": "2009",
+    "Rated": "PG-13",
+    "Released": "18 Dec 2009",
+    "Runtime": "162 min",
+    "Genre": "Action, Adventure, Fantasy",
+    "Director": "James Cameron",
+    "Writer": "James Cameron",
+    "Actors": "Sam Worthington, Zoe Saldana, Sigourney Weaver, Stephen Lang",
+    "Plot": "A paraplegic marine dispatched to the moon Pandora on a unique mission becomes torn between following his orders and protecting the world he feels is his home.",
+    "Language": "English, Spanish",
+    "Country": "USA, UK",
+    "Awards": "Won 3 Oscars. Another 80 wins & 121 nominations.",
+    "Poster": "http://ia.media-imdb.com/images/M/MV5BMTYwOTEwNjAzMl5BMl5BanBnXkFtZTcwODc5MTUwMw@@._V1_SX300.jpg",
+    "Metascore": "83",
+    "imdbRating": "7.9",
+    "imdbVotes": "876,575",
+    "imdbID": "tt0499549",
+    "Type": "movie",
+    "Response": "True"
+  }
+];
+
+function getRating(watchList){
+
+  let counter = 0;
+
+  let averageRating = watchList.reduce((rating, obj) => {
+
+    if (obj.Director == "Christopher Nolan") {
+      rating += +obj.imdbRating
+      counter += 1
+    }
+
+    return rating
+  }, 0)
+
+  return averageRating / counter;
+}
+
+console.log(getRating(watchList));
+```
+
+</details>
+
+
+## Использование функций высшего порядка ```map```, ```filter``` и ```reduce``` для решения сложной проблемы
+
+
+Теперь, когда вы проработали несколько задач с использованием функций более высокого порядка, таких как ```map()```, ```filter()``` и ```reduce()```, вы можете применить их для решения более сложной задачи.
+
+Мы определили функцию с именем ```squareList```. Вам нужно заполнить код для функции ```squareList```, используя любую комбинацию ```map()```, ```filter()```, и ```reduce()``` так, чтобы он возвращал новый массив, содержащий только квадрат только положительных целых чисел (десятичный числа не являются целыми числами), когда ему передается массив вещественных чисел. Примером массива, содержащего только вещественные числа, является ```[-3, 4.8, 5, 3, -3.2]```.
+
+Примечание: ваша функция не должна использовать какие-либо циклы ```for``` или ```while``` или функцию ```forEach()```.
+
+
+```javascript
+const squareList = (arr) => {
+
+  let result = arr.reduce((newArr, item) => {
+    if (item % 1 == 0 && item > 0) {
+      newArr.push(item ** 2)
+    }
+
+    return newArr
+  }, [])
+
+  return result;
+};
+
+const squaredIntegers = squareList([-3, 4.8, 5, 3, -3.2]);
+console.log(squaredIntegers);
+
+```
+
+
+## Сортировка массива по алфавиту с помощью метода сортировки
+
+
+Метод ```sort``` сортирует элементы массива в соответствии с функцией обратного вызова.
+
+Например:
+
+```javascript
+function ascendingOrder(arr) {
+  return arr.sort(function(a, b) {
+    return a - b;
+  });
+}
+ascendingOrder([1, 5, 2, 3, 4]);
+// Returns [1, 2, 3, 4, 5]
+
+function reverseAlpha(arr) {
+  return arr.sort(function(a, b) {
+    return a === b ? 0 : a < b ? 1 : -1;
+  });
+}
+reverseAlpha(['l', 'h', 'z', 'b', 's']);
+// Returns ['z', 's', 'l', 'h', 'b']
+```
+
+Метод сортировки JavaScript по умолчанию сортирует по значению элементов в Unicode, что может привести к неожиданным результатам. Поэтому рекомендуется предоставить функцию обратного вызова для указания способа сортировки элементов массива. 
+
+Когда такая функция обратного вызова, как правило называемая ```compareFunction```, вызывается, элементы массива сортируются в соответствии с возвращаемым значением ```compareFunction```: 
+
+1. если функция ```compareFunction(a, b)``` возвращает значение меньше 0 для 2 элементов ```a``` и ```b```, то ```a``` будет идти перед ```b```. 
+2. Если функция ```compareFunction(a, b)``` возвращает значение больше 0 для двух элементов ```a``` и ```b```, то ```b``` будет стоять перед ```a```. 
+3. Если функция ```compareFunction(a, b)``` возвращает значение, равное 0 для двух элементов ```a``` и ```b```, то ```a``` и ```b``` останутся неизменными.
+
+
+```javascript
+function alphabeticalOrder(arr) {
+
+  return arr.sort((a, b) => a < b ? -1 : 1)
+}
+
+alphabeticalOrder(["a", "d", "c", "a", "z", "g"]);
+```
+
+
+## Возврат отсортированного массива без изменения исходного массива
+
+Побочным эффектом метода сортировки является то, что он изменяет порядок элементов в исходном массиве. Другими словами, он мутирует массив на месте. Один из способов избежать этого - сначала объединить пустой массив с сортируемым (помните, что ```slice``` и ```concat``` возвращают новый массив), а затем запустить метод сортировки.
+
+
+```javascript
+
+const globalArray = [5, 6, 3, 2, 9];
+
+function nonMutatingSort(arr) {
+  
+  let copyArr = arr.slice()
+  
+  return copyArr.sort((a, b) => a < b ? -1 : 1)
+}
+
+nonMutatingSort(globalArray);
+```
+
+
+## Разбить строку на массив с помощью метода ```split```
+
+Метод ```split``` разбивает строку на массив строк. Он принимает аргумент для разделителя, который может быть символом, используемым для разбиения строки или регулярное выражение. Например, если разделителем является пробел, вы получаете массив слов, а если разделителем является пустая строка, вы получаете массив каждого символа в строке.
+
+Вот 2 примера, которые разделяют одну строку пробелами, а другую цифрами с помощью регулярного выражения:
+
+```javascript
+var str = "Hello World";
+var bySpace = str.split(" ");
+// Sets bySpace to ["Hello", "World"]
+
+var otherString = "How9are7you2today";
+var byDigits = otherString.split(/\d/);
+// Sets byDigits to ["How", "are", "you", "today"]
+```
+
+Поскольку строки являются неизменными, метод ```split``` упрощает работу с ними.
+
+```javascript
+function splitify(str) {
+ 
+ return str.split(/\W/)
+}
+splitify("Hello World,I-am code");
+```
+
+
+## Объедините массив в строку с помощью метода ```join```
+
+
+Метод ```join``` используется для объединения элементов массива вместе для создания строки. Он принимает аргумент для разделителя, который используется для разделения элементов массива в строке.
+
+Пример:
+
+```javascript
+var arr = ["Hello", "World"];
+var str = arr.join(" ");
+// Sets str to "Hello World"
+```
+
+```javascript
+function sentensify(str) {
+  
+  return str.split(/\W/).join(" ")
+}
+
+console.log(sentensify("May-the-force-be-with-you"));
+```
+
+
+## Применение функционального программирования для преобразования строк в url slugs(slug - это уникальная строка идентификатор, понятная человеку (в отличие от ID) и содержащая только "безопасные" символы)
+
+
+Последние несколько задач охватывали ряд полезных методов массива и строки, которые следуют принципам функционального программирования. Мы так же узнали о ```reduce```, который является мощным методом, используемым для сведения проблем к более простым формам. От вычисления средних до сортировки, любая операция массива может быть достигнута путем ее применения. 
+
+Напомним, что ```map``` и ```filter``` являются частными случаями сокращения. 
+
+Давайте объединим то, что мы узнали, чтобы решить практическую проблему.
+
+Многие сайты управления контентом (CMS) имеют названия сообщений, добавленных в часть URL-адреса для простых целей закладок. Например, если вы пишите средний пост под названием "Stop Using Reduce", вполне вероятно, что URL-адрес будет иметь некоторую форму строки заголовка в нем (".../stop-using-reduce"). Возможно вы уже заметили это на сайте FCC.
+
+
+Заполните функцию urlSlug, чтобы она преобразовала заголовок строки и вернула дефисную версию для URL. Вы можете использовать любой из методов, описанных в этом разделе, и не использовать ```replace```. Вот требования:
+
+1. Входные данные представляют собой строку с пробелами и Title-case словами
+2. Вывод - строка с пробелами между словами, замененными дефисом (-)
+3. Все слова в выводе должны быть в нижнем регистре
+4. Выходные данные не должны иметь пробелов
+
+
+```javascript
+function urlSlug(title) {
+
+  return title.trim().split(/\W+/).join('-').toLowerCase()
+}
+
+console.log(urlSlug(globalTitle));
+console.log(globalTitle)
+```
+
+
+## Используйте метод ```every```, чтобы проверить, что каждый элемент массива соответствует критериям
+
+
+Метод ```every``` работает с массивами, чтобы проверить, проходит ли каждый элемент определенный тест. Он возвращает логическое значение true, если все значения соответствуют критериям и false, если нет.
+
+Например, следующий код будет проверять, все ли элементы в массиве чисел больше 10:
+
+```javascript
+var numbers = [1, 5, 8, 0, 10, 11];
+numbers.every(function(currentValue) {
+  return currentValue < 10;
+});
+// Returns false
+```
+
+```javascript
+function checkPositive(arr) {
+ 
+  return arr.every((cuttentValue) => cuttentValue > 0)
+}
+
+checkPositive([1, 2, 3, -4, 5]);
+console.log(checkPositive([1, 2, 3, -4, 5]))
+```
+
+
+## Использования метода ```some```, что бы проверить, что какой нибудь элемент в массиве соответствуют критериям.
+
+
+Метод ```some``` работает с массива, чтобы проверить, проходит ли какой-либо элемент определенный тест. Он возвращает логическое значние true, если какой нибудь из элементов соотвествует критериям, и false, если нет.
+
+Например, следующий код будет проверять, есть ли какой либо элемент в массиве чисел, который меньше 10:
+
+```javascript
+var numbers = [10, 50, 8, 220, 110, 11];
+numbers.some(function(currentValue) {
+  return currentValue < 10;
+});
+// Returns true
+```
+
+```javascript
+function checkPositive(arr) {
+ 
+  return arr.some((cuttentValue) => cuttentValue > 0)
+}
+
+checkPositive([1, 2, 3, -4, 5]);
+console.log(checkPositive([1, 2, 3, -4, 5]))
+```
+
+
+## Введение в выделку(карринг) и частичное применение
+
+
+Арность функции - это количество аргументов, которые она требует. Каррирование функции означает преобразование функции N арности в N функций арности 1.
+
+Другими словами, он реструктурирует функцию так, что она принимает один аргумент, затем возвращает другую функцию, которая принимает следующий аргумент и так далее.
+
+Вот пример:
+
+```javascript
+//Un-curried function
+function unCurried(x, y) {
+  return x + y;
+}
+
+//Curried function
+function curried(x) {
+  return function(y) {
+    return x + y;
+  }
+}
+//Alternative using ES6
+const curried = x => y => x + y
+
+curried(1)(2) // Returns 3
+```
+
+Это полезно в вашей программе, если вы не можете предоставить все аргументы функции одновременно. Вы можете сохранить каждый вызов функции в переменную, которая будет содержать возвращенную ссылку на функцию, которая принимает следующий аргумент, когда он доступен. Вот пример использования функции curried в приведенном выше примере:
+
+```javascript
+// Call a curried function in parts:
+var funcForY = curried(1);
+console.log(funcForY(2)); // Prints 3
+```
+
+Аналогично, частичное применение может быть описано как применение нескольких аргументов к функции за одни раз и возвращение другой функции, которая применяется к большему количеству аргументов. Например:
+
+```javascript
+//Impartial function
+function impartial(x, y, z) {
+  return x + y + z;
+}
+var partialFn = impartial.bind(this, 1, 2);
+partialFn(10); // Returns 13
+```
+
+
+```javascript
+function add(x) {
+  // Only change code below this line
+  return function(y) {
+    return function(z) {
+      return x + y + z
+    }
+  }
+
+  // Only change code above this line
+}
+add(10)(20)(30);
+```
 
 
 
