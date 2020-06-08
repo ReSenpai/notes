@@ -1,0 +1,37 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+  
+.drag-and-drop {
+    background-color: #29e;
+    color: white;
+    font-size: 20px;
+    font-family: sans-serif;
+    border-radius: 8px;
+    padding: 20px;
+    touch-action: none;
+  
+    width: 120px;
+    height: 100px;
+  
+    /* This makes things *much* easier */
+    box-sizing: border-box;
+}
+
+.small-box {
+    background-color: rgb(175, 113, 12);
+    color: white;
+    font-size: 20px;
+    font-family: sans-serif;
+    border-radius: 8px;
+    padding: 0 10px 0 10px;
+    touch-action: none;
+  
+    width: 120px;
+    height: 30px;
+  
+    /* This makes things *much* easier */
+    box-sizing: border-box; 
+}
