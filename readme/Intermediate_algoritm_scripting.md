@@ -296,4 +296,118 @@ console.log(uniteUnique([1, 3, 2], [5, 2, 1, 4], [2, 1]));
 ```
 
 
-## 
+## Преобразование HTML сущностей
+
+
+Преобразуйте символы ```&```, ```<```, ```>```, ```"```(двойные кавычки) и ```'``` (апостроф) в строку соответсвующей им HTML сущности.
+
+
+```javascript
+
+// Мое решение
+function convertHTML(str) {
+    const html = {
+        '&' : '&amp;',
+        '<' : '&lt;',
+        '>' : '&gt;',
+        '"' : '&quot;',
+        '\'' : '&apos;'
+    }
+
+    return [...str].reduce((accum, symbol) => {
+        if (html[symbol]) {
+            return accum += html[symbol]
+        }
+        return accum += symbol
+    }, '');
+}
+  
+console.log(convertHTML('Stuff in "quotation marks"'));
+// return -  Stuff in &quot;quotation marks&quot;
+
+//Крутое решение из hint
+function convertHTML(str) {
+    
+    const htmlEntities = {
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&apos;"
+    };
+
+    return str.replace(/([&<>\"'])/g, match => htmlEntities[match]);
+}
+  
+console.log(convertHTML("Dolce & Gabbana > kek's < ololo"));
+```
+
+
+## Суммируйте все нечетные числа Фибоначчи
+
+Учитывая положительное целое число ```num```, верните сумму всех нечетных чисел Фибоначчи, которые меньше или равны ```num```.
+
+Первые два числа в последовательности Фибоначчи равны 1 и 1. Каждое дополнительное число в последовательности является суммой двух предыдущих чисел. Первые шесть чисел последовательности Фибоначчи - это 1, 1, 2, 3, 5, 8.
+
+Например, ```sumFibs(10)``` должен возвращать 10, потому что все нечетные числа Фибонначчи, меньшие или равные 10, равны 1, 1, 3 и 5.
+
+
+```javascript
+function sumFibs(num) {
+
+    let result = 0; 
+    let prevNumber = 0;
+    let currNumber = 1;
+    while (currNumber <= num) {
+        if (currNumber % 2 == 1) {
+            result += currNumber
+        }
+        currNumber += prevNumber;
+        prevNumber = currNumber - prevNumber;
+    }
+
+    return result;
+}
+  
+console.log(sumFibs(4000000));
+// return                       4613732
+```
+
+
+## Сумма всех простых чисел
+
+
+Простое число - это целое число больше 1 с ровно двумя делителями: на 1 и на себя само. Например, 2 - это просто число, потому что оно делится только на 1 и 2. Напротив, 4 не является простым числом, так как оно делится на 1, 2 и 4.
+
+Перепишите ```sumPrimes``` так, чтобы он возвращал сумму всех простых чисел, которые меньше или равны ```num```.
+
+
+```javascript
+function sumPrimes(num) {
+    function simpleNumber(num) {
+        for(let i = 2; i < num; i++) {
+            if(num % i === 0) return false;
+        }
+        return num > 1;
+    }
+
+    let result = 0;
+
+    for (let i = 1; i <= num; i++) {    
+        if (simpleNumber(i)) {
+            result += i;
+        }
+    }
+
+    return result;
+}
+  
+console.log(sumPrimes(10));
+// return 17
+// 2, 3, 5, 7
+```
+
+
+## Наименьшее общее кратное
+
+
