@@ -1,4 +1,5 @@
 # Введение в средние задачи алгоритмов
+[На главную](../README.md)  
 
 
 ## Суммирование всех чисел в диапазоне
@@ -409,5 +410,354 @@ console.log(sumPrimes(10));
 
 
 ## Наименьшее общее кратное
+
+
+Найдите наименьшее общее кратное из приведенных параметров, которое может быть равномерно разделено на оба, а также на все последовательные числа в диапазоне между этими параметрами.
+
+Диапазон будет преставлять собой массив из двух чисел, которые не обязательно будут в числовом порядке.
+
+Например, если заданы 1 и 3, найдите наименьшее общее кратное как 1, так и 3, которое так же равномерно делится на все числа между 1 и 3. Ответ здесь будет 6.
+
+
+```javascript
+function smallestCommons(arr) {
+
+    const copyArr = [...arr];
+    let number = 1;
+
+    copyArr.sort((a, b) => a - b);
+  
+    function checkNumber (number) {
+        for (let i = copyArr[0]; i <= copyArr[1]; i++) {
+            if (number % i != 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+  
+    while (!checkNumber(number)) {
+        number += 1;
+    }
+
+    return number;
+}
+      
+      
+console.log(smallestCommons([5, 1]));
+// return 60
+```
+
+
+## Drop It
+
+
+Учитывая массив arr, выполните итерацию и удалите каждый елемент, начиная с первого элемента (индекс 0), пока функция ```func``` не вернет ```true```, когда итерационный элемент будет передан через него.
+
+Затем верните остальную часть массива, как только условие будет выполнено, в противном случае ```arr``` должен быть возвращен как пустой массив.
+
+```javascript
+function dropElements(arr, func) {
+
+    let newArr = [...arr];
+
+    for (let index = 0; index < arr.length; index++) {
+        if (func(arr[index])) {
+            return  newArr.slice(index);
+        }
+        
+    }
+
+    return [];
+}
+
+console.log(dropElements([1, 2, 3, 9, 2], function(n) {return n > 2;}));
+// return [3, 9, 2]
+```
+
+
+## Steamroller
+
+
+Сгладить вложенный массив. Вы должны учитывать различные уровни вложенности.
+
+
+```javascript
+// Мое решение
+function steamrollArray(arr) {
+
+    let newArr = [];
+
+    function recurcy (element) {
+        element.forEach(num => {
+
+            if (typeof num !== 'object' || num.constructor === Object) {
+                newArr.push(num)
+            } else {
+                recurcy(num)
+            }            
+        });  
+    }
+    recurcy(arr)
+ 
+    return newArr;
+}
+  
+console.log(steamrollArray([1, {ololo : 'kek'}, [3, [[4]]]]));
+// return - [1, {}, 3, 4]
+
+//Крутое решение из hint
+function steamrollArray(arr) {
+  let flat = [].concat(...arr);
+  return flat.some(Array.isArray) ? steamrollArray(flat) : flat;
+}
+
+steamrollArray([1, [2], [3, [[4]]]]);
+```
+
+
+## Binary agent
+
+Возвращает переведенно на английский язык предложение переданной двоичной строки.
+
+Двиичная строка будет разделена пробелом.
+
+```javascript
+function binaryAgent(str) {
+
+    const arr = str.split(' ');
+    let binToStr = [];
+
+    for (let i = 0; i < arr.length; i++) {
+        binToStr.push(String.fromCharCode(parseInt(arr[i], 2)));
+    }
+    return binToStr.join("");
+}
+  
+console.log(binaryAgent("01000001 01110010 01100101 01101110 00100111 01110100 00100000 01100010 01101111 01101110 01100110 01101001 01110010 01100101 01110011 00100000 01100110 01110101 01101110 00100001 00111111"));
+//                     Aren't bonfires fun!?
+```
+
+
+## Всё должно быть правдой
+
+
+Проверьте, является ли предикат (второй аргумент) истинным для всех элементов коллекции (первый аргумент).
+
+Другими словами, вам предоставляется коллекция массивов объектов. Предикат ```pre``` будет свойством объекта, и вам нужно вернуть ```true```, если его значние истинно. В противном случае возвращает ```false```.
+
+В JavaScript истинные значения - это значения, которые преобразуются в ```true``` при вычислении в логическом контексте.
+
+Помните, что вы можете получить доступ к свойствам объекта с помощью точечной или ```[]``` нотации.
+
+
+```javascript
+//Мое решение
+function truthCheck(collection, pre) {
+
+    for (const element of collection) {
+        console.log(!element.hasOwnProperty(pre))
+        if (!element[pre]) {
+            return false;
+        }
+    }
+
+    return true;
+}
+  
+console.log(truthCheck([{"user": "Tinky-Winky", "sex": "male", "age": 0}, {"user": "Dipsy", "sex": "male", "age": 3}, {"user": "Laa-Laa", "sex": "female", "age": 5}, {"user": "Po", "sex": "female", "age": 4}], "age"));
+// return - false
+  
+// Крутое решение из hint
+function truthCheck(collection, pre) {
+    // Is everyone being true?
+    return collection.every(obj => obj[pre]);
+}
+```
+
+
+## Необязательыне аргументы
+
+
+Создайте функцию, котрая суммирует два аргумента вместе. Если указан только один аргумент, то возвращает функцию, которая ожидает один аргумент и возвращает сумму.
+
+Например, ```addTogether(2, 3)``` должен возвращать 5, а ```addTogether(2)``` должен возвращать функцию.
+
+Вызов этой возвращаемой функции с одним аргументом затем вернет сумму:
+
+```var sumTwoAnd = addTogether(2);```
+
+```sumTwoAnd(3)``` вернет ```5```.
+
+Если какой либо аргумент не является допустимым числом, верните undefined.
+
+
+```javascript
+// Мое решение
+function addTogether() {
+    
+    let copyArg = [...arguments];
+
+    for (const iterator of copyArg) {
+        if (typeof iterator != 'number') {
+            return undefined
+        }
+    }
+    
+    if (arguments.length === 2) {
+        return arguments[0] + arguments[1];
+    } else {
+        let num = arguments[0];
+        return function (arg) {
+        
+            if (typeof arg != 'number') {
+                return undefined
+            }
+    
+            return num + arg
+        };
+    }
+}
+  
+console.log(addTogether(2 , 3));
+
+// Какое то некст ЛВЛ решение
+//jshint esversion: 6
+function addTogether() {
+  var args = Array.from(arguments);
+  return args.some(n => typeof n !== "number")
+    ? undefined
+    : args.length > 1
+    ? args.reduce((acc, n) => (acc += n), 0)
+    : n => (typeof n === "number" ? n + args[0] : undefined);
+}
+
+// test here
+addTogether(2, 3);
+```
+
+
+## Make a Person
+
+
+Заполните конструктор объекта с помощью следующих методов ниже:
+
+```javascript
+getFirstName()
+getLastName()
+getFullName()
+setFirstName(first)
+setLastName(last)
+setFullName(firstAndLast)
+```
+
+Запустите тесты, чтобы увидеть ожидаемый результат для каждого метода. Методы, принимающий аргумент, должны принимать только один аргумент, и он должен быть строкой. Эти методы должны быть единственными доступными средствами взаимодествия с объектом.
+
+
+```javascript
+class Person {
+    constructor (fullName) {
+        this._fullName = fullName;
+        this._void1 = '';
+        this._void2 = '';
+        this._void3 = '';
+        this._void4 = '';
+        this._void5 = '';
+    }
+
+    _validateName(element) {
+        if (typeof element != 'string') {
+            return false;
+        }
+        return true;
+    }
+    
+    getFirstName() {
+
+        return this._fullName.split(' ')[0];
+    }
+
+    getLastName() {
+        return this._fullName.split(' ')[1];
+    }
+
+    getFullName() {
+        return this._fullName
+    }
+
+    setFirstName(first) {
+        if (this._validateName(first)) {
+            this._fullName = `${first} ${this._fullName.split(' ')[1]}`;
+            return 'Success';
+        }
+        return 'Failure, use the "string" type of data';
+    }
+
+    setLastName(last) {
+        if (this._validateName(last)) {
+            this._fullName = `${this._fullName.split(' ')[0]} ${last}`;
+            return 'Success';
+        }
+        return 'Failure, use the "string" type of data';
+    }
+
+    setFullName(fullName) {
+        if (this._validateName(fullName)) {
+            this._fullName = fullName;
+            return 'Success';
+        }
+        return 'Failure, use the "string" type of data';
+    }
+}
+
+const bob = new Person('Bob Ross');
+console.log(bob.getFirstName());
+console.log(bob.getLastName());
+console.log(bob.getFullName());
+console.log(bob.setFirstName('Alisa'));
+console.log(bob.getFullName());
+console.log(bob.getFirstName());
+console.log(bob.setLastName('Grey'));
+console.log(bob.getFullName());
+console.log(bob.setFullName('Valera Lubich'));
+console.log(bob.getFirstName());
+console.log(bob.getFullName());
+console.log(Object.keys(bob).length);
+```
+
+Пришлось заполнить конструктор войдами, что бы пройти тест на FCC (там стары синтаксис ООП)
+
+
+## Map the Debris
+
+
+Вернуть новый массив, который преобразует среднюю высоту небесных тел в их орбитальные периоды (в секундах).
+
+Массив будет содержать объекты в формате ```{name: 'name', avgAlt: avgAlt}```
+
+Вы можете почитать об орбитальных периодах в [Википедии](https://en.wikipedia.org/wiki/Orbital_period).
+
+Значения должны быть округлены до ближайшего целого числа. Тела находятся на орбите Земли.
+
+Радиус Земли составляет 6367.4447 километров, а велечина GM земли составляет 398600.4418 km ** 3s **-2.
+
+
+```javascript
+function orbitalPeriod(arr) {
+
+    const GM = 398600.4418;
+    const earthRadius = 6367.4447;
+
+    return arr.reduce((newArr, obj) => {
+        newArr.push({ name : obj.name, orbitalPeriod: Math.round((2 * Math.PI) * Math.sqrt((earthRadius + obj.avgAlt)**3 / GM))})
+        return newArr
+    }, [])     
+}
+
+console.log(orbitalPeriod([{name: "iss", avgAlt: 413.6}, {name: "hubble", avgAlt: 556.7}, {name: "moon", avgAlt: 378632.553}]))
+
+// [{name : "iss", orbitalPeriod: 5557}, {name: "hubble", orbitalPeriod: 5734}, {name: "moon", orbitalPeriod: 2377399}]
+```
+
 
 
