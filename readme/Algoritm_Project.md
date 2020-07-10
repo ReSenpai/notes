@@ -232,5 +232,63 @@ One-hundred Dollars	$100 (ONE HUNDRED)
 ]
 ```
 
+Решение:
+
+
+```javascript
+function checkCashRegister(price, cash, cid) {
+
+    const moneyTable = {
+        'PENNY'      : { value: 0.01 },
+        'NICKEL'     : { value: 0.05 },
+        'DIME'       : { value: 0.1  },
+        'QUARTER'    : { value: 0.25 },
+        'ONE'        : { value: 1    },
+        'FIVE'       : { value: 5    },
+        'TEN'        : { value: 10   },
+        'TWENTY'     : { value: 20   },
+        'ONE HUNDRED': { value: 100  }
+    }
+
+    let change = cash - price
+
+    let amountCash = cid.reduce((accum, item) => {
+        moneyTable[item[0]].quantity = Math.ceil(item[1] / moneyTable[item[0]].value)
+        moneyTable[item[0]].cash = item[1]
+        return accum += item[1] 
+    }, 0).toFixed(2)
+
+    const reverseCid = cid.reverse()
+
+    function recalculation(iterator) {
+        cash = 0;
+        while (moneyTable[iterator[0]].quantity > 0 && Math.floor(change / moneyTable[iterator[0]].value) > 0) {
+            moneyTable[iterator[0]].quantity -= 1
+            change = (change - moneyTable[iterator[0]].value).toFixed(2)
+            cash += moneyTable[iterator[0]].value
+            amountCash = (amountCash - moneyTable[iterator[0]].value).toFixed(2)
+        }   
+        return cash
+    }
+
+    const result = reverseCid.reduce((accum, item) => {
+        if (Math.floor(change / moneyTable[item[0]].value) > 0) {
+            let money = +(recalculation(item)).toFixed(2)
+            accum.push([item[0], money])
+            
+        } else {
+            amountCash = (amountCash - moneyTable[item[0]].cash).toFixed(2)
+        }
+        return accum
+    }, [])
+    
+    if (amountCash < change) return { status: "INSUFFICIENT_FUNDS", change: [] }
+    if (amountCash == change) return { status: "CLOSED", change: cid.reverse() }
+    else return { status: "OPEN", change: result }
+}
+  
+console.log(checkCashRegister(19.5, 20, [["PENNY", 0.5], ["NICKEL", 0], ["DIME", 0], ["QUARTER", 0], ["ONE", 0], ["FIVE", 0], ["TEN", 0], ["TWENTY", 0], ["ONE HUNDRED", 0]]))
+```
+
 
 
