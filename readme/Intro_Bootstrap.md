@@ -342,3 +342,20 @@ Font Awesome - это удобная библиотека иконок. Эти �
 ## Добавление шрифта Awesome Isons ко всем нашим кнопкам
 
 
+Шрифт Awesome является удобной библиотекой иконок. Вы можете указывать их размер с помощью пикселей и они будут считать размер шрифта от их родительского элемента.
+
+
+```html
+<div class="col-xs-4">
+  <button class="btn btn-block btn-primary"><i class="fas fa-thumbs-up"></i> Like</button>
+</div>
+<div class="col-xs-4">
+  <button class="btn btn-block btn-info"><i class="fas fa-info-circle"></i>Info</button>
+</div>
+<div class="col-xs-4">
+  <button class="btn btn-block btn-danger"><i class="fas fa-trash"></i>Delete</button>
+</div>
+```
+
+
+## Responsively Style Radio Buttons
