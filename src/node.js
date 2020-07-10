@@ -15,7 +15,6 @@
 
 
 function checkCashRegister(price, cash, cid) {
-    
     const moneyTable = {
         'PENNY'      : { value: 0.01 },
         'NICKEL'     : { value: 0.05 },
@@ -29,9 +28,7 @@ function checkCashRegister(price, cash, cid) {
     }
 
     let change = cash - price
-    console.log(change)
 
-    
     let amountCash = cid.reduce((accum, item) => {
         moneyTable[item[0]].quantity = Math.ceil(item[1] / moneyTable[item[0]].value)
         moneyTable[item[0]].cash = item[1]
@@ -39,56 +36,51 @@ function checkCashRegister(price, cash, cid) {
     }, 0).toFixed(2)
     const reverseCid = cid.reverse()
 
-    if (result == change) return {status: "CLOSED", change: cid}
-    if (result < change) return {status: "INSUFFICIENT_FUNDS", change: []}
+    function recalculation(iterator) {
+        // 1. сдача минус купюра из кассы должно быть больше или ровно нулю
+        // 2. если курюра в кассе закончилась, то выходим из цикла
+        cash = 0;
+        while (moneyTable[iterator[0]].quantity > 0 && Math.floor(change / moneyTable[iterator[0]].value) > 0) {
+            moneyTable[iterator[0]].quantity -= 1
+            change = (change - moneyTable[iterator[0]].value).toFixed(2)
+            cash += moneyTable[iterator[0]].value
+            amountCash = (amountCash - moneyTable[iterator[0]].value).toFixed(2)
+        }   
+        return cash
+    }
 
-    console.log(moneyTable)
-
-
-    cheker(result)
-
-    const reverseCid = cid.reverse()
-    const superResult = reverseCid.reduce((accum, item) => {
-
-        let result2 = 0
-
-        function getMoney() {
-            if (moneyTable[item[0]].value > change && moneyTable[item[0]].quantity > 0) {
-                result = (result - moneyTable[item[0]].value).toFixed(2)
-                cheker(result)
-            }
-            if (moneyTable[item[0]].value <= change && moneyTable[item[0]].quantity > 0) {
-                result2 += moneyTable[item[0]].value
-                moneyTable[item[0]].quantity -= 1
-                change -= moneyTable[item[0]].value
-                result = (result - moneyTable[item[0]].value).toFixed(2)
-                
-                cheker(result)
-                getMoney()
-            }
-            console.log(result)
-            return accum
+    const result = reverseCid.reduce((accum, item) => {
+        if (Math.floor(change / moneyTable[item[0]].value) > 0) {
+            let money = +(recalculation(item)).toFixed(2)
+            accum.push([item[0], money])
             
+        } else {
+            amountCash = (amountCash - moneyTable[item[0]].cash).toFixed(2)
         }
-        getMoney()
-        if (result2) accum.change.push([item[0], result2])
         return accum
-    }, {status: "OPEN", change: []})
+    }, [])
+
+    // 1) сумма которую над отдать из кассы = кэш покупателя - цена продукта
+    // 2) Максимальное количество монет данной ценности которые можно отдать = сумма % монета
     
-    return superResult
+    console.log(amountCash)
+    console.log(change)
+    if (amountCash < change) return {status: "INSUFFICIENT_FUNDS", change: []}
+    if (amountCash == change) return {status: "CLOSED", change: cid.reverse()}
+    else return {status: "OPEN", change: result}
 }
   
-console.log(checkCashRegister(3.26, 100, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1], ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55], ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]]))
+console.log(checkCashRegister(19.5, 20, [["PENNY", 0.5], ["NICKEL", 0], ["DIME", 0], ["QUARTER", 0], ["ONE", 0], ["FIVE", 0], ["TEN", 0], ["TWENTY", 0], ["ONE HUNDRED", 0]]))
+  
 
 /**
- * {status: "OPEN", change: [
- * ["TWENTY", 60], 
- * ["TEN", 20], 
- * ["FIVE", 15], 
- * ["ONE", 1], 
- * ["QUARTER", 0.5], 
- * ["DIME", 0.2], 
- * ["PENNY", 0.04]]})
+ * {
+ *      status: "CLOSED", 
+ *      change: [
+ *          ["PENNY", 0.5], 
+ *          ["NICKEL", 0], 
+ *          ["DIME", 0], 
+ *          ["QUARTER", 0], ["ONE", 0], ["FIVE", 0], ["TEN", 0], ["TWENTY", 0], ["ONE HUNDRED", 0]]}
  */
 
 // {status: "OPEN", change: [["QUARTER", 0.5]]}
