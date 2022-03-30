@@ -1,26 +1,26 @@
 # re notes
 
-[Регулярные выражения](readme/Regular_Expressions.md)
+[Регулярные выражения](md/Regular_Expressions.md)
 
-[Отладка](readme/Debugging_Challenges.md)
+[Отладка](md/Debugging_Challenges.md)
 
-[Структура данных](readme/Basic_Data_Structure.md)
+[Структура данных](md/Basic_Data_Structure.md)
 
-[Базовые алгоритмы](readme/Basic_algoritm_scripting.md)
+[Базовые алгоритмы](md/Basic_algoritm_scripting.md)
 
-[ООП](readme/OOP.md)
+[ООП](md/OOP.md)
 
-[Функциональное программирование](readme/Functional_Programming.md)
+[Функциональное программирование](md/Functional_Programming.md)
 
-[Vue.js](readme/Vue_js.md)
+[Vue.js](md/Vue_js.md)
 
-[Создание Telegram бота на Node.js](readme/node_js_bot.md)
+[Создание Telegram бота на Node.js](md/node_js_bot.md)
 
 * MySQL
-    * [Базовые операции](readme/SQL_step1.md)
-    * [Выборки из нескольких источников](readme/SQL_step2.md)
+    * [Базовые операции](md/SQL_step1.md)
+    * [Выборки из нескольких источников](md/SQL_step2.md)
 
-[Решение задач с Codewars](readme/codewars.md)
+[Решение задач с Codewars](md/codewars.md)
 
 https://resenpai.github.io/notes/dist/
 
